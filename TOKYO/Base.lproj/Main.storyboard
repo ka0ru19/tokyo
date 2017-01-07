@@ -104,6 +104,7 @@
                     <connections>
                         <outlet property="collectionView" destination="fuL-zn-ZzY" id="3fV-6B-bOm"/>
                         <outlet property="imageView" destination="XPB-p1-AUh" id="e7u-0S-Pe4"/>
+                        <outlet property="navigationBar" destination="GYU-en-zM8" id="REj-Pu-EhO"/>
                         <outlet property="tokyoTextField" destination="kEV-M1-LVV" id="4Sz-8A-MuP"/>
                     </connections>
                 </viewController>

@@ -11,6 +11,7 @@ import Accounts
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tokyoTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -177,13 +178,16 @@ extension ViewController {
                                 forCellWithReuseIdentifier: "cell")
         let layout = UICollectionViewFlowLayout()
         let margin: CGFloat = 4.0
-        layout.itemSize = CGSize(width: collectionView.frame.width / 2 - margin * 2 , height: 60)
+        layout.itemSize = CGSize(width: self.view.bounds.width / 2 - margin * 2 , height: 60)
         // Cellのマージン.
         layout.sectionInset = UIEdgeInsetsMake(0.0, margin, 0.0, margin) //top,left,bottom,rightの余白
         layout.minimumInteritemSpacing = margin
         collectionView.collectionViewLayout = layout
         
-        tokyoTextField.center = imageView.center
-        view.reloadInputViews()
+        let titleView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        titleView.image = UIImage(named: "TokyoLogo1.png")
+        titleView.contentMode = .scaleAspectFit
+//        navigationController?.navigationItem.titleView = titleView
+        navigationBar.topItem?.titleView = titleView
     }
 }
