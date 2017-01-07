@@ -178,11 +178,12 @@ extension ViewController {
         let layout = UICollectionViewFlowLayout()
         let margin: CGFloat = 4.0
         layout.itemSize = CGSize(width: collectionView.frame.width / 2 - margin * 2 , height: 60)
-        
         // Cellのマージン.
         layout.sectionInset = UIEdgeInsetsMake(0.0, margin, 0.0, margin) //top,left,bottom,rightの余白
         layout.minimumInteritemSpacing = margin
-        
         collectionView.collectionViewLayout = layout
+        
+        tokyoTextField.center = imageView.center
+        view.reloadInputViews()
     }
 }
