@@ -15,9 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var tokyoTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let fontFamilyNamesArray = UIFont.familyNames // font名のarray
+    
+    var selectedFontName: String? // 選択されたfont名
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tokyoTextField.delegate = self
+        initView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,10 +61,17 @@ class ViewController: UIViewController {
         let fontSize: CGFloat = image.size.width / CGFloat(text.characters.count)
         
         let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        
+        var font = UIFont()
+        if (selectedFontName != nil) {
+            font = UIFont(name: selectedFontName!, size: fontSize)!
+        } else {
+            font = UIFont.boldSystemFont(ofSize: fontSize)
+        }
         textStyle.alignment = NSTextAlignment.center
         let textFontAttributes = [
-            NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize) ,
-            NSForegroundColorAttributeName: UIColor.red,
+            NSFontAttributeName: font ,
+            NSForegroundColorAttributeName: UIColor.white,
             NSParagraphStyleAttributeName: textStyle
         ]
         
@@ -92,6 +103,41 @@ class ViewController: UIViewController {
     
 }
 
+extension ViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedFontName = fontFamilyNamesArray[indexPath.row]
+        tokyoTextField.font = UIFont(name: selectedFontName!, size: 80)!
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(fontFamilyNamesArray.count)
+        return fontFamilyNamesArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //コレクションビューから識別子「TestCell」のセルを取得する。
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FontSampleCollectionViewCell
+        
+        //セルの背景色をランダムに設定する。
+        cell.backgroundColor = UIColor(red: CGFloat(drand48()),
+                                       green: CGFloat(drand48()),
+                                       blue: CGFloat(drand48()),
+                                       alpha: 1.0)
+        
+        //セルのラベルに番号を設定する。
+        cell.sampleLabel.text = tokyoTextField.text ?? "NO WORD"
+        cell.sampleLabel.font = UIFont(name: fontFamilyNamesArray[indexPath.row], size: 20)
+        cell.nameLabel.text = fontFamilyNamesArray[indexPath.row]
+        cell.nameLabel.font = UIFont(name: fontFamilyNamesArray[indexPath.row], size: 12)
+        
+        return cell
+        
+    }
+}
+
+
 extension ViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     // カメラ、アルバムの呼び出しメソッド(カメラorアルバムのソースタイプが引き数)
@@ -119,5 +165,24 @@ extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension ViewController {
+    func initView() {
+        tokyoTextField.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UINib(nibName: "FontSampleCollectionViewCell", bundle: nil),
+                                forCellWithReuseIdentifier: "cell")
+        let layout = UICollectionViewFlowLayout()
+        let margin: CGFloat = 4.0
+        layout.itemSize = CGSize(width: collectionView.frame.width / 2 - margin * 2 , height: 60)
+        
+        // Cellのマージン.
+        layout.sectionInset = UIEdgeInsetsMake(0.0, margin, 0.0, margin) //top,left,bottom,rightの余白
+        layout.minimumInteritemSpacing = margin
+        
+        collectionView.collectionViewLayout = layout
     }
 }

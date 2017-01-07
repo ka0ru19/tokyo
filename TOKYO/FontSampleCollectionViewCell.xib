@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="gTV-IL-0wX" customClass="FontSampleCollectionViewCell" customModule="TOKYO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="189" height="58"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="189" height="58"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="1UR-Qz-02F">
+                        <rect key="frame" x="8" y="8" width="174" height="90"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-Kr-TWD">
+                                <rect key="frame" x="0.0" y="0.0" width="169" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Font Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3S-W5-coR">
+                                <rect key="frame" x="0.0" y="26" width="169" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="TS7-wn-959"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="jfL-Kr-TWD" firstAttribute="leading" secondItem="1UR-Qz-02F" secondAttribute="leading" id="9zy-KB-lag"/>
+                            <constraint firstAttribute="trailing" secondItem="I3S-W5-coR" secondAttribute="trailing" id="ABS-6K-Orq"/>
+                            <constraint firstItem="I3S-W5-coR" firstAttribute="leading" secondItem="1UR-Qz-02F" secondAttribute="leading" id="Bzk-fM-WcY"/>
+                            <constraint firstAttribute="trailing" secondItem="jfL-Kr-TWD" secondAttribute="trailing" id="CEU-aL-w0w"/>
+                            <constraint firstAttribute="bottom" secondItem="I3S-W5-coR" secondAttribute="bottom" id="RNK-aA-1oN"/>
+                            <constraint firstItem="jfL-Kr-TWD" firstAttribute="top" secondItem="1UR-Qz-02F" secondAttribute="top" id="mRh-bd-oU2"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="1UR-Qz-02F" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="FZm-fz-0Lr"/>
+                <constraint firstAttribute="bottomMargin" secondItem="1UR-Qz-02F" secondAttribute="bottom" constant="2" id="OLn-0P-2ED"/>
+                <constraint firstAttribute="trailingMargin" secondItem="1UR-Qz-02F" secondAttribute="trailing" constant="2" id="PZa-Mi-Bu9"/>
+                <constraint firstItem="1UR-Qz-02F" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" constant="2" id="a7c-0f-0Bc"/>
+                <constraint firstItem="1UR-Qz-02F" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="tk0-Yt-qFz"/>
+                <constraint firstItem="1UR-Qz-02F" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" constant="2" id="ztD-6x-MAs"/>
+            </constraints>
+            <size key="customSize" width="191" height="48"/>
+            <connections>
+                <outlet property="nameLabel" destination="I3S-W5-coR" id="8nr-24-25q"/>
+                <outlet property="sampleLabel" destination="jfL-Kr-TWD" id="Sgg-3u-nJ1"/>
+            </connections>
+            <point key="canvasLocation" x="104.5" y="53"/>
+        </collectionViewCell>
+    </objects>
+</document>
