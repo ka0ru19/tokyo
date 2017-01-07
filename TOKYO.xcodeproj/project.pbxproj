@@ -12,6 +12,8 @@
 		63CD30E71E20A1A700D68E85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30E51E20A1A700D68E85 /* Main.storyboard */; };
 		63CD30E91E20A1A700D68E85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30E81E20A1A700D68E85 /* Assets.xcassets */; };
 		63CD30EC1E20A1A700D68E85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */; };
+		63CD30F41E20B2D100D68E85 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30F31E20B2D100D68E85 /* sample.jpg */; };
+		63CD30F61E20B53E00D68E85 /* sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30F51E20B53E00D68E85 /* sample2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		63CD30E81E20A1A700D68E85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63CD30EB1E20A1A700D68E85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63CD30ED1E20A1A700D68E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63CD30F31E20B2D100D68E85 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
+		63CD30F51E20B53E00D68E85 /* sample2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				63CD30E11E20A1A700D68E85 /* AppDelegate.swift */,
 				63CD30E31E20A1A700D68E85 /* ViewController.swift */,
 				63CD30E51E20A1A700D68E85 /* Main.storyboard */,
+				63CD30F31E20B2D100D68E85 /* sample.jpg */,
+				63CD30F51E20B53E00D68E85 /* sample2.jpg */,
 				63CD30E81E20A1A700D68E85 /* Assets.xcassets */,
 				63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */,
 				63CD30ED1E20A1A700D68E85 /* Info.plist */,
@@ -126,7 +132,9 @@
 			files = (
 				63CD30EC1E20A1A700D68E85 /* LaunchScreen.storyboard in Resources */,
 				63CD30E91E20A1A700D68E85 /* Assets.xcassets in Resources */,
+				63CD30F61E20B53E00D68E85 /* sample2.jpg in Resources */,
 				63CD30E71E20A1A700D68E85 /* Main.storyboard in Resources */,
+				63CD30F41E20B2D100D68E85 /* sample.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
