@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		634C39A51E25EEC00060FAB3 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C399F1E25EEC00060FAB3 /* FirebaseAnalytics.framework */; };
+		634C39A61E25EEC00060FAB3 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A01E25EEC00060FAB3 /* FirebaseInstanceID.framework */; };
+		634C39A71E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A11E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework */; };
+		634C39A81E25EEC00060FAB3 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A21E25EEC00060FAB3 /* GoogleSymbolUtilities.framework */; };
+		634C39A91E25EEC00060FAB3 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A31E25EEC00060FAB3 /* GoogleUtilities.framework */; };
+		63BABB541E25F4B40015C836 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BABB531E25F4B40015C836 /* GoogleMobileAds.framework */; };
 		63CD30E21E20A1A700D68E85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD30E11E20A1A700D68E85 /* AppDelegate.swift */; };
 		63CD30E41E20A1A700D68E85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD30E31E20A1A700D68E85 /* ViewController.swift */; };
 		63CD30E71E20A1A700D68E85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30E51E20A1A700D68E85 /* Main.storyboard */; };
 		63CD30E91E20A1A700D68E85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30E81E20A1A700D68E85 /* Assets.xcassets */; };
 		63CD30EC1E20A1A700D68E85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */; };
-		63CD30F41E20B2D100D68E85 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30F31E20B2D100D68E85 /* sample.jpg */; };
 		63CD30F61E20B53E00D68E85 /* sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30F51E20B53E00D68E85 /* sample2.jpg */; };
 		63CD30F91E21095800D68E85 /* FontSampleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD30F71E21095800D68E85 /* FontSampleCollectionViewCell.swift */; };
 		63CD30FA1E21095800D68E85 /* FontSampleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30F81E21095800D68E85 /* FontSampleCollectionViewCell.xib */; };
-		63CD31021E21316B00D68E85 /* album.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD31011E21316B00D68E85 /* album.png */; };
 		63CD31041E215D6F00D68E85 /* TokyoLogo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD31031E215D6E00D68E85 /* TokyoLogo1.png */; };
 		63CD31211E21621400D68E85 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 63CD31071E21621400D68E85 /* Contents.json */; };
 		63CD31221E21621400D68E85 /* Icon-App-20x20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD31081E21621400D68E85 /* Icon-App-20x20@1x.png */; };
@@ -44,9 +48,22 @@
 		63CD31381E21621400D68E85 /* iTunesArtwork@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD311E1E21621400D68E85 /* iTunesArtwork@1x.png */; };
 		63CD31391E21621400D68E85 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD311F1E21621400D68E85 /* iTunesArtwork@2x.png */; };
 		63CD313A1E21621400D68E85 /* iTunesArtwork@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD31201E21621400D68E85 /* iTunesArtwork@3x.png */; };
+		63EA5C491E275B7400681DAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63EA5C481E275B7300681DAE /* GoogleService-Info.plist */; };
+		63EA5C521E285A9100681DAE /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA5C511E285A9100681DAE /* InfoViewController.swift */; };
+		63EA5C541E286EE500681DAE /* FontRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA5C531E286EE500681DAE /* FontRequestViewController.swift */; };
+		899D6A112804C7C9CF38B62E /* Pods_TOKYO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA0783DA674BE1CB30D4E41 /* Pods_TOKYO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BA0783DA674BE1CB30D4E41 /* Pods_TOKYO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TOKYO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CEACA8E796D915DEA6D842D /* Pods-TOKYO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TOKYO.release.xcconfig"; path = "Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO.release.xcconfig"; sourceTree = "<group>"; };
+		534E49F6D13585AA8FFED6C1 /* Pods-TOKYO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TOKYO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO.debug.xcconfig"; sourceTree = "<group>"; };
+		634C399F1E25EEC00060FAB3 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		634C39A01E25EEC00060FAB3 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		634C39A11E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		634C39A21E25EEC00060FAB3 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		634C39A31E25EEC00060FAB3 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		63BABB531E25F4B40015C836 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		63CD30DE1E20A1A700D68E85 /* TOKYO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOKYO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CD30E11E20A1A700D68E85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CD30E31E20A1A700D68E85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,11 +71,9 @@
 		63CD30E81E20A1A700D68E85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63CD30EB1E20A1A700D68E85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63CD30ED1E20A1A700D68E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63CD30F31E20B2D100D68E85 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		63CD30F51E20B53E00D68E85 /* sample2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample2.jpg; sourceTree = "<group>"; };
 		63CD30F71E21095800D68E85 /* FontSampleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontSampleCollectionViewCell.swift; sourceTree = "<group>"; };
 		63CD30F81E21095800D68E85 /* FontSampleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontSampleCollectionViewCell.xib; sourceTree = "<group>"; };
-		63CD31011E21316B00D68E85 /* album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album.png; sourceTree = "<group>"; };
 		63CD31031E215D6E00D68E85 /* TokyoLogo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TokyoLogo1.png; sourceTree = "<group>"; };
 		63CD31071E21621400D68E85 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		63CD31081E21621400D68E85 /* Icon-App-20x20@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@1x.png"; sourceTree = "<group>"; };
@@ -86,6 +101,9 @@
 		63CD311E1E21621400D68E85 /* iTunesArtwork@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@1x.png"; sourceTree = "<group>"; };
 		63CD311F1E21621400D68E85 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		63CD31201E21621400D68E85 /* iTunesArtwork@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@3x.png"; sourceTree = "<group>"; };
+		63EA5C481E275B7300681DAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		63EA5C511E285A9100681DAE /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		63EA5C531E286EE500681DAE /* FontRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontRequestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +111,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634C39A81E25EEC00060FAB3 /* GoogleSymbolUtilities.framework in Frameworks */,
+				899D6A112804C7C9CF38B62E /* Pods_TOKYO.framework in Frameworks */,
+				634C39A51E25EEC00060FAB3 /* FirebaseAnalytics.framework in Frameworks */,
+				634C39A61E25EEC00060FAB3 /* FirebaseInstanceID.framework in Frameworks */,
+				634C39A71E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework in Frameworks */,
+				63BABB541E25F4B40015C836 /* GoogleMobileAds.framework in Frameworks */,
+				634C39A91E25EEC00060FAB3 /* GoogleUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,8 +127,16 @@
 		63CD30D51E20A1A700D68E85 = {
 			isa = PBXGroup;
 			children = (
+				63BABB531E25F4B40015C836 /* GoogleMobileAds.framework */,
+				634C399F1E25EEC00060FAB3 /* FirebaseAnalytics.framework */,
+				634C39A01E25EEC00060FAB3 /* FirebaseInstanceID.framework */,
+				634C39A11E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework */,
+				634C39A21E25EEC00060FAB3 /* GoogleSymbolUtilities.framework */,
+				634C39A31E25EEC00060FAB3 /* GoogleUtilities.framework */,
 				63CD30E01E20A1A700D68E85 /* TOKYO */,
 				63CD30DF1E20A1A700D68E85 /* Products */,
+				942E2E5E51A110F85B5ADD04 /* Pods */,
+				8C25D083789C96BE0D39A7A8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,16 +153,17 @@
 			children = (
 				63CD30E11E20A1A700D68E85 /* AppDelegate.swift */,
 				63CD30E31E20A1A700D68E85 /* ViewController.swift */,
+				63EA5C511E285A9100681DAE /* InfoViewController.swift */,
+				63EA5C531E286EE500681DAE /* FontRequestViewController.swift */,
 				63CD30E51E20A1A700D68E85 /* Main.storyboard */,
 				63CD30F71E21095800D68E85 /* FontSampleCollectionViewCell.swift */,
 				63CD30F81E21095800D68E85 /* FontSampleCollectionViewCell.xib */,
-				63CD30F31E20B2D100D68E85 /* sample.jpg */,
 				63CD30F51E20B53E00D68E85 /* sample2.jpg */,
-				63CD31011E21316B00D68E85 /* album.png */,
 				63CD31031E215D6E00D68E85 /* TokyoLogo1.png */,
 				63CD31051E21621300D68E85 /* iconImages */,
 				63CD30E81E20A1A700D68E85 /* Assets.xcassets */,
 				63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */,
+				63EA5C481E275B7300681DAE /* GoogleService-Info.plist */,
 				63CD30ED1E20A1A700D68E85 /* Info.plist */,
 			);
 			path = TOKYO;
@@ -176,6 +210,23 @@
 			path = AppIcon.appiconset;
 			sourceTree = "<group>";
 		};
+		8C25D083789C96BE0D39A7A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BA0783DA674BE1CB30D4E41 /* Pods_TOKYO.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		942E2E5E51A110F85B5ADD04 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				534E49F6D13585AA8FFED6C1 /* Pods-TOKYO.debug.xcconfig */,
+				1CEACA8E796D915DEA6D842D /* Pods-TOKYO.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,9 +234,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63CD30F01E20A1A700D68E85 /* Build configuration list for PBXNativeTarget "TOKYO" */;
 			buildPhases = (
+				B46DB4B1E96768E6A5C8C679 /* [CP] Check Pods Manifest.lock */,
 				63CD30DA1E20A1A700D68E85 /* Sources */,
 				63CD30DB1E20A1A700D68E85 /* Frameworks */,
 				63CD30DC1E20A1A700D68E85 /* Resources */,
+				0B72DB0073C646EAE3DC0FBF /* [CP] Embed Pods Frameworks */,
+				D34B8BFC9A95BE1C10F19491 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -208,7 +262,7 @@
 				TargetAttributes = {
 					63CD30DD1E20A1A700D68E85 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = CJPA6M3LJM;
+						DevelopmentTeam = 44KX7M22LP;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -262,9 +316,8 @@
 				63CD30FA1E21095800D68E85 /* FontSampleCollectionViewCell.xib in Resources */,
 				63CD312B1E21621400D68E85 /* Icon-App-57x57@1x.png in Resources */,
 				63CD31231E21621400D68E85 /* Icon-App-20x20@2x.png in Resources */,
-				63CD31021E21316B00D68E85 /* album.png in Resources */,
+				63EA5C491E275B7400681DAE /* GoogleService-Info.plist in Resources */,
 				63CD312A1E21621400D68E85 /* Icon-App-40x40@3x.png in Resources */,
-				63CD30F41E20B2D100D68E85 /* sample.jpg in Resources */,
 				63CD31311E21621400D68E85 /* Icon-App-72x72@2x.png in Resources */,
 				63CD31341E21621400D68E85 /* Icon-App-76x76@3x.png in Resources */,
 				63CD31371E21621400D68E85 /* Icon-Small-50x50@2x.png in Resources */,
@@ -275,6 +328,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B72DB0073C646EAE3DC0FBF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B46DB4B1E96768E6A5C8C679 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D34B8BFC9A95BE1C10F19491 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		63CD30DA1E20A1A700D68E85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -282,7 +383,9 @@
 			files = (
 				63CD30E41E20A1A700D68E85 /* ViewController.swift in Sources */,
 				63CD30E21E20A1A700D68E85 /* AppDelegate.swift in Sources */,
+				63EA5C521E285A9100681DAE /* InfoViewController.swift in Sources */,
 				63CD30F91E21095800D68E85 /* FontSampleCollectionViewCell.swift in Sources */,
+				63EA5C541E286EE500681DAE /* FontRequestViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,9 +432,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wataru Inoue (44KX7M22LP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 44KX7M22LP;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -351,6 +456,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -378,9 +484,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wataru Inoue (44KX7M22LP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wataru Inoue (44KX7M22LP)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 44KX7M22LP;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -393,6 +501,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -401,12 +510,18 @@
 		};
 		63CD30F11E20A1A700D68E85 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 534E49F6D13585AA8FFED6C1 /* Pods-TOKYO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CJPA6M3LJM;
+				DEVELOPMENT_TEAM = 44KX7M22LP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TOKYO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wataru.TOKYO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inocci.TOKYO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -414,12 +529,18 @@
 		};
 		63CD30F21E20A1A700D68E85 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CEACA8E796D915DEA6D842D /* Pods-TOKYO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CJPA6M3LJM;
+				DEVELOPMENT_TEAM = 44KX7M22LP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TOKYO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wataru.TOKYO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inocci.TOKYO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -444,6 +565,7 @@
 				63CD30F21E20A1A700D68E85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

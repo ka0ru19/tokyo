@@ -8,20 +8,26 @@
 
 import UIKit
 import Accounts
+import Firebase
+import GoogleMobileAds
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tokyoTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var bannerView: GADBannerView!
+    
     let fontFamilyNamesArray = UIFont.familyNames // font名のarray
+    
+    var ref : FIRDatabaseReference!
     
     var selectedFontName: String? // 選択されたfont名
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = FIRDatabase.database().reference().child("list").child("selectedFont")
         initView()
     }
     
@@ -38,11 +44,14 @@ class ViewController: UIViewController {
         precentPickerController(sourceType: .photoLibrary)
     }
     
+    @IBAction func infoButton(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toInfo", sender: nil)
+    }
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
         
         let tokyoImage: UIImage = makeTokyoImage()
         
-        let activityVC = UIActivityViewController(activityItems: [tokyoImage,"#TOKYO"],
+        let activityVC = UIActivityViewController(activityItems: [tokyoImage,"#TOKYO "],
                                                   applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
         
@@ -69,6 +78,10 @@ class ViewController: UIViewController {
         } else {
             font = UIFont.boldSystemFont(ofSize: fontSize)
         }
+        
+        // Firebaseに情報を保存
+        setDataToFirebase(fontname: font.fontName, text: text)
+        
         textStyle.alignment = NSTextAlignment.center
         let textFontAttributes = [
             NSFontAttributeName: font ,
@@ -102,6 +115,22 @@ class ViewController: UIViewController {
         return newImage!
     }
     
+    func setDataToFirebase(fontname: String, text: String) {
+        
+        // 時刻を取得
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateStyle = .medium // -> ex: 2016/10/29
+        formatter.timeStyle = .medium // -> ex: 13:20:08
+
+        let formattedDate = formatter.string(from: now)
+        
+        ref.childByAutoId().setValue(["name": fontname,
+                                      "text": text,
+                                      "date": formattedDate])
+    }
+    
 }
 
 extension ViewController: UICollectionViewDelegate {
@@ -113,7 +142,6 @@ extension ViewController: UICollectionViewDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(fontFamilyNamesArray.count)
         return fontFamilyNamesArray.count
     }
     
@@ -187,7 +215,48 @@ extension ViewController {
         let titleView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         titleView.image = UIImage(named: "TokyoLogo1.png")
         titleView.contentMode = .scaleAspectFit
-//        navigationController?.navigationItem.titleView = titleView
-        navigationBar.topItem?.titleView = titleView
+        self.navigationItem.titleView = titleView
+        
+        // AdMob
+        bannerView.delegate = self
+        bannerView.adUnitID = "ca-app-pub-4040761063524447/7604354219"
+        bannerView.rootViewController = self
+        bannerView.adSize = kGADAdSizeSmartBannerLandscape
+        bannerView.load(GADRequest())
+    }
+}
+
+extension ViewController: GADBannerViewDelegate {
+    
+    // Called when an ad request loaded an ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print(#function)
+    }
+    
+    // Called when an ad request failed.
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("\(#function): \(error.localizedDescription)")
+    }
+    
+    // Called just before presenting the user a full screen view, such as a browser, in response to
+    // clicking on an ad.
+    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+        print(#function)
+    }
+    
+    // Called just before dismissing a full screen view.
+    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+        print(#function)
+    }
+    
+    // Called just after dismissing a full screen view.
+    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+        print(#function)
+    }
+    
+    // Called just before the application will background or terminate because the user clicked on an
+    // ad that will launch another application (such as the App Store).
+    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+        print(#function)
     }
 }
