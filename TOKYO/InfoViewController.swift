@@ -22,8 +22,8 @@ class InfoViewController: UIViewController {
                           "開発者 Facebookアカウント"]
     
     // 参考-> http://qiita.com/naoyashiga/items/09d9947880f467ed4422
-    let itunesURL: String = ""
-    let reviewUrl: String = ""
+    let itunesURL: String = "itms-apps://itunes.apple.com/app/1194887658"
+    let reviewUrl: String = "itms-apps:////itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1194887658"
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -200,6 +200,7 @@ extension ViewController: UITextFieldDelegate {
 extension ViewController {
     func initView() {
         tokyoTextField.delegate = self
+        tokyoTextField.returnKeyType = .done
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "FontSampleCollectionViewCell", bundle: nil),
