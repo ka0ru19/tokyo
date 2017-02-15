@@ -29,16 +29,10 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="XPB-p1-AUh" secondAttribute="height" multiplier="1:1" id="Bdv-jE-oLZ"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="NH5-ib-QdI" appends="YES" id="ZDH-Cw-QsU"/>
-                                </connections>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOKYO" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kEV-M1-LVV">
-                                <rect key="frame" x="0.0" y="191" width="375" height="120"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="80"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0mV-Vu-NFQ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fuL-zn-ZzY">
                                 <rect key="frame" x="0.0" y="447" width="375" height="170"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,23 +63,25 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kEV-M1-LVV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3b2-Tq-o6n"/>
                             <constraint firstItem="YL8-cr-wfv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5Pm-7J-2c6"/>
+                            <constraint firstItem="0mV-Vu-NFQ" firstAttribute="bottom" secondItem="XPB-p1-AUh" secondAttribute="bottom" id="66d-cV-DAv"/>
                             <constraint firstItem="XPB-p1-AUh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6d2-dO-JOo"/>
                             <constraint firstItem="XPB-p1-AUh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="C12-9A-mUD"/>
-                            <constraint firstItem="kEV-M1-LVV" firstAttribute="centerX" secondItem="XPB-p1-AUh" secondAttribute="centerX" id="DBM-k9-z4k"/>
+                            <constraint firstItem="0mV-Vu-NFQ" firstAttribute="centerX" secondItem="XPB-p1-AUh" secondAttribute="centerX" id="EAL-n5-Qfy"/>
                             <constraint firstItem="YL8-cr-wfv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OMn-Au-o0w"/>
                             <constraint firstAttribute="trailing" secondItem="XPB-p1-AUh" secondAttribute="trailing" id="UEC-Qr-wEj"/>
                             <constraint firstItem="XPB-p1-AUh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UNV-Rj-nB6"/>
                             <constraint firstItem="XPB-p1-AUh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VOx-gW-NIt"/>
                             <constraint firstItem="fuL-zn-ZzY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="We1-85-XV8"/>
-                            <constraint firstItem="kEV-M1-LVV" firstAttribute="centerY" secondItem="XPB-p1-AUh" secondAttribute="centerY" id="XKk-xh-c1p"/>
                             <constraint firstAttribute="trailing" secondItem="XPB-p1-AUh" secondAttribute="trailing" id="ZJr-v8-VRf"/>
                             <constraint firstItem="YL8-cr-wfv" firstAttribute="top" secondItem="fuL-zn-ZzY" secondAttribute="bottom" id="dOq-Ef-7AF"/>
+                            <constraint firstItem="0mV-Vu-NFQ" firstAttribute="leading" secondItem="XPB-p1-AUh" secondAttribute="leading" id="hcv-xW-suZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YL8-cr-wfv" secondAttribute="bottom" id="jBM-IU-Dc4"/>
                             <constraint firstItem="fuL-zn-ZzY" firstAttribute="top" secondItem="XPB-p1-AUh" secondAttribute="bottom" constant="8" id="lwQ-Ms-Stl"/>
+                            <constraint firstItem="0mV-Vu-NFQ" firstAttribute="centerY" secondItem="XPB-p1-AUh" secondAttribute="centerY" id="nhq-84-A4I"/>
                             <constraint firstItem="fuL-zn-ZzY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qNQ-Zt-nXs"/>
-                            <constraint firstAttribute="trailing" secondItem="kEV-M1-LVV" secondAttribute="trailing" id="tf0-Vp-hLr"/>
+                            <constraint firstItem="0mV-Vu-NFQ" firstAttribute="top" secondItem="XPB-p1-AUh" secondAttribute="top" id="rav-gN-T7D"/>
+                            <constraint firstItem="0mV-Vu-NFQ" firstAttribute="trailing" secondItem="XPB-p1-AUh" secondAttribute="trailing" id="uVu-FP-w3P"/>
                             <constraint firstItem="YL8-cr-wfv" firstAttribute="top" secondItem="fuL-zn-ZzY" secondAttribute="bottom" id="vsw-PY-AlZ"/>
                             <constraint firstAttribute="trailing" secondItem="fuL-zn-ZzY" secondAttribute="trailing" id="yf1-ey-59K"/>
                             <constraint firstAttribute="trailing" secondItem="YL8-cr-wfv" secondAttribute="trailing" id="zKj-D6-vvK"/>
@@ -120,13 +116,12 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="fuL-zn-ZzY" id="3fV-6B-bOm"/>
+                        <outlet property="dummyView" destination="0mV-Vu-NFQ" id="biH-g0-LHM"/>
                         <outlet property="imageView" destination="XPB-p1-AUh" id="e7u-0S-Pe4"/>
-                        <outlet property="tokyoTextField" destination="kEV-M1-LVV" id="4Sz-8A-MuP"/>
                         <segue destination="9QS-8j-8jn" kind="push" identifier="toInfo" id="mgk-eC-3B6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="NH5-ib-QdI"/>
             </objects>
             <point key="canvasLocation" x="1079.2" y="138.98050974512745"/>
         </scene>

@@ -13,16 +13,22 @@ import Firebase
 class ViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var tokyoTextField: UITextField!
+    @IBOutlet weak var dummyView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+    
     
     let fontFamilyNamesArray = UIFont.familyNames // font名のarray
     
     var ref : FIRDatabaseReference!
     
-    var selectedFontName: String? // 選択されたfont名
-    
     var sourceImage: UIImage! // もともとの写真
+    var tokyoText: String? // 合成するテキスト
+    var tokyoFontName: String? // 選択されたfont名
+    
+    // 拡大率
+    var zoomNow:CGFloat=1.0
+    let zoomMin:CGFloat=0.2
+    let zoomMax:CGFloat=2.4
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,25 +64,23 @@ class ViewController: UIViewController {
     
     func makeTokyoImage() -> UIImage {
         
-        // テキストの内容の設定
-        guard let text = tokyoTextField.text else { // 合成する文字列を設定
-            print("no word in tokyoTextField")
+        guard let tokyoText = tokyoText else {
             return sourceImage
         }
         
-        let fontSize: CGFloat = sourceImage.size.width / CGFloat(text.characters.count)
+        let fontSize: CGFloat = sourceImage.size.width / CGFloat(tokyoText.characters.count) * zoomNow
         
         let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         
         var font = UIFont()
-        if (selectedFontName != nil) {
-            font = UIFont(name: selectedFontName!, size: fontSize)!
+        if (tokyoFontName != nil) {
+            font = UIFont(name: tokyoFontName!, size: fontSize)!
         } else {
             font = UIFont.boldSystemFont(ofSize: fontSize)
         }
         
         // Firebaseに情報を保存
-        setDataToFirebase(fontname: font.fontName, text: text)
+        setDataToFirebase(fontname: font.fontName, text: tokyoText)
         
         textStyle.alignment = NSTextAlignment.center
         let textFontAttributes = [
@@ -94,13 +98,15 @@ class ViewController: UIViewController {
         // 描き出す位置と大きさの設定 CGRect([左からのx座標]px, [上からのy座標]px, [縦の長さ]px, [横の長さ]px)
         //let margin: CGFloat = 5.0 // 余白
         var textRect  = CGRect(x: 0, y: 0, width: 0, height: 0)
-        textRect.size = sourceImage.size
-        textRect.origin = CGPoint(x: (sourceImage.size.width / 2 ) - (fontSize * CGFloat(text.characters.count) / 2),
+//        textRect.size = sourceImage.size
+        textRect.size = CGSize(width: sourceImage.size.width * zoomNow,
+                               height: sourceImage.size.height * zoomNow)
+        textRect.origin = CGPoint(x: (sourceImage.size.width / 2 ) - (fontSize * CGFloat(tokyoText.characters.count) / 2),
                                   y: (sourceImage.size.height / 2) - (fontSize / 2)
         )
         
         // textRectで指定した範囲にtextFontAttributesにしたがってtextを描き出す
-        text.draw(in: textRect, withAttributes: textFontAttributes)
+        tokyoText.draw(in: textRect, withAttributes: textFontAttributes)
         
         // グラフィックスコンテキストの画像を取得
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -131,8 +137,8 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedFontName = fontFamilyNamesArray[indexPath.row]
-        tokyoTextField.font = UIFont(name: selectedFontName!, size: 80)!
+        tokyoFontName = fontFamilyNamesArray[indexPath.row]
+//        tokyoTextField.font = UIFont(name: tokyoFontName!, size: 80)!
         
         imageView.image = makeTokyoImage()
     }
@@ -154,7 +160,7 @@ extension ViewController: UICollectionViewDataSource {
                                        alpha: 1.0)
         
         //セルのラベルに番号を設定する。
-        cell.sampleLabel.text = tokyoTextField.text ?? "NO WORD"
+        cell.sampleLabel.text = tokyoText ?? "NO WORD"
         cell.sampleLabel.font = UIFont(name: fontFamilyNamesArray[indexPath.row], size: 20)
         cell.nameLabel.text = fontFamilyNamesArray[indexPath.row]
         cell.nameLabel.font = UIFont(name: fontFamilyNamesArray[indexPath.row], size: 12)
@@ -196,13 +202,47 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
+extension ViewController: UIGestureRecognizerDelegate {
+    // ピンチジェスチャー
+    func viewPinch(sender:UIPinchGestureRecognizer){
+        // 拡大率を適当に決める
+        zoomNow += (sender.scale-1) * 0.1
+        
+        print("sender.scale: \(sender.scale)")
+        print("zoomNow: \(zoomNow)")
+        
+        if zoomNow > zoomMax {
+            zoomNow=zoomMax
+        }else if zoomNow < zoomMin {
+            zoomNow=zoomMin
+        }
+        
+        imageView.image = makeTokyoImage()
+        
+//        // ピンチ中心座標
+//        var location:CGPoint=sender.locationInView(baseScrollView!)
+//        
+//        // 拡大処理
+//        self.viewZoom(zoomNow, ox:location.x, oy:location.y)
+    }
+}
+
 extension ViewController {
     
     // 初期化
     func initView() {
-        tokyoTextField.delegate = self
-        tokyoTextField.returnKeyType = .done
+//        tokyoTextField.delegate = self
+//        tokyoTextField.returnKeyType = .done
         sourceImage = UIImage(named: "sample2.jpg")
+        tokyoText = "TOKYO"
+        imageView.image = makeTokyoImage()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.inputTextAlert))
+        tapGesture.delegate = self
+        dummyView.addGestureRecognizer(tapGesture)
+        
+        let pinchGesture = UIPinchGestureRecognizer(target:self, action: #selector(self.viewPinch))
+        pinchGesture.delegate=self
+        dummyView.addGestureRecognizer(pinchGesture)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "FontSampleCollectionViewCell", bundle: nil),
@@ -220,4 +260,29 @@ extension ViewController {
         titleView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = titleView
     }
+    
+    func inputTextAlert() {
+        var alert = UIAlertController(title: "Input Text!", message: nil, preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Done", style: .default) { (action:UIAlertAction!) -> Void in
+            
+            // 入力したテキストをコンソールに表示
+            let textField = alert.textFields![0] as UITextField
+            self.tokyoText = textField.text
+            self.imageView.image = self.makeTokyoImage()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        // UIAlertControllerにtextFieldを追加
+        alert.addTextField { (textField:UITextField!) -> Void in
+            textField.text = self.tokyoText
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
 }
