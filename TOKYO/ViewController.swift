@@ -9,7 +9,6 @@
 import UIKit
 import Accounts
 import Firebase
-import GoogleMobileAds
 
 class ViewController: UIViewController {
     
@@ -17,13 +16,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var tokyoTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var bannerView: GADBannerView!
-    
     let fontFamilyNamesArray = UIFont.familyNames // font名のarray
     
     var ref : FIRDatabaseReference!
     
     var selectedFontName: String? // 選択されたfont名
+    
+    var sourceImage: UIImage! // もともとの写真
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,17 +57,14 @@ class ViewController: UIViewController {
     }
     
     func makeTokyoImage() -> UIImage {
-        guard let image = imageView.image else { //背景画像を設定
-            fatalError()
-        }
         
         // テキストの内容の設定
         guard let text = tokyoTextField.text else { // 合成する文字列を設定
             print("no word in tokyoTextField")
-            return image
+            return sourceImage
         }
         
-        let fontSize: CGFloat = image.size.width / CGFloat(text.characters.count)
+        let fontSize: CGFloat = sourceImage.size.width / CGFloat(text.characters.count)
         
         let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         
@@ -90,17 +86,17 @@ class ViewController: UIViewController {
         ]
         
         // グラフィックスコンテキスト生成,編集を開始
-        UIGraphicsBeginImageContext(image.size)
+        UIGraphicsBeginImageContext(sourceImage.size)
         
         // 読み込んだ写真を書き出す
-        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        sourceImage.draw(in: CGRect(x: 0, y: 0, width: sourceImage.size.width, height: sourceImage.size.height))
         
         // 描き出す位置と大きさの設定 CGRect([左からのx座標]px, [上からのy座標]px, [縦の長さ]px, [横の長さ]px)
         //let margin: CGFloat = 5.0 // 余白
         var textRect  = CGRect(x: 0, y: 0, width: 0, height: 0)
-        textRect.size = image.size
-        textRect.origin = CGPoint(x: (image.size.width / 2 ) - (fontSize * CGFloat(text.characters.count) / 2),
-                                  y: (image.size.height / 2) - (fontSize / 2)
+        textRect.size = sourceImage.size
+        textRect.origin = CGPoint(x: (sourceImage.size.width / 2 ) - (fontSize * CGFloat(text.characters.count) / 2),
+                                  y: (sourceImage.size.height / 2) - (fontSize / 2)
         )
         
         // textRectで指定した範囲にtextFontAttributesにしたがってtextを描き出す
@@ -137,6 +133,8 @@ extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedFontName = fontFamilyNamesArray[indexPath.row]
         tokyoTextField.font = UIFont(name: selectedFontName!, size: 80)!
+        
+        imageView.image = makeTokyoImage()
     }
 }
 
@@ -185,7 +183,8 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
         self.dismiss(animated: true, completion: nil)
         // 画像を出力
         imageView.contentMode = .scaleAspectFit
-        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        sourceImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        imageView.image = sourceImage
     }
     
 }
@@ -198,9 +197,12 @@ extension ViewController: UITextFieldDelegate {
 }
 
 extension ViewController {
+    
+    // 初期化
     func initView() {
         tokyoTextField.delegate = self
         tokyoTextField.returnKeyType = .done
+        sourceImage = UIImage(named: "sample2.jpg")
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "FontSampleCollectionViewCell", bundle: nil),
@@ -217,47 +219,5 @@ extension ViewController {
         titleView.image = UIImage(named: "TokyoLogo1.png")
         titleView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = titleView
-        
-        // AdMob
-        bannerView.delegate = self
-        bannerView.adUnitID = "ca-app-pub-4040761063524447/7604354219"
-        bannerView.rootViewController = self
-        bannerView.adSize = kGADAdSizeSmartBannerLandscape
-        bannerView.load(GADRequest())
-    }
-}
-
-extension ViewController: GADBannerViewDelegate {
-    
-    // Called when an ad request loaded an ad.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called when an ad request failed.
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("\(#function): \(error.localizedDescription)")
-    }
-    
-    // Called just before presenting the user a full screen view, such as a browser, in response to
-    // clicking on an ad.
-    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called just before dismissing a full screen view.
-    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called just after dismissing a full screen view.
-    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called just before the application will background or terminate because the user clicked on an
-    // ad that will launch another application (such as the App Store).
-    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-        print(#function)
     }
 }

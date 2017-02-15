@@ -9,7 +9,6 @@ target 'TOKYO' do
 
   pod 'Firebase'
   pod 'Firebase/Core'
-  pod 'Firebase/AdMob'
   pod 'Firebase/Database'
 
 end

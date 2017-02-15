@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		634C39A51E25EEC00060FAB3 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C399F1E25EEC00060FAB3 /* FirebaseAnalytics.framework */; };
-		634C39A61E25EEC00060FAB3 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A01E25EEC00060FAB3 /* FirebaseInstanceID.framework */; };
-		634C39A71E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A11E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework */; };
-		634C39A81E25EEC00060FAB3 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A21E25EEC00060FAB3 /* GoogleSymbolUtilities.framework */; };
-		634C39A91E25EEC00060FAB3 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634C39A31E25EEC00060FAB3 /* GoogleUtilities.framework */; };
-		63BABB541E25F4B40015C836 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BABB531E25F4B40015C836 /* GoogleMobileAds.framework */; };
 		63CD30E21E20A1A700D68E85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD30E11E20A1A700D68E85 /* AppDelegate.swift */; };
 		63CD30E41E20A1A700D68E85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD30E31E20A1A700D68E85 /* ViewController.swift */; };
 		63CD30E71E20A1A700D68E85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63CD30E51E20A1A700D68E85 /* Main.storyboard */; };
@@ -58,12 +52,6 @@
 		1BA0783DA674BE1CB30D4E41 /* Pods_TOKYO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TOKYO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CEACA8E796D915DEA6D842D /* Pods-TOKYO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TOKYO.release.xcconfig"; path = "Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO.release.xcconfig"; sourceTree = "<group>"; };
 		534E49F6D13585AA8FFED6C1 /* Pods-TOKYO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TOKYO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO.debug.xcconfig"; sourceTree = "<group>"; };
-		634C399F1E25EEC00060FAB3 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		634C39A01E25EEC00060FAB3 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
-		634C39A11E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
-		634C39A21E25EEC00060FAB3 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
-		634C39A31E25EEC00060FAB3 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
-		63BABB531E25F4B40015C836 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		63CD30DE1E20A1A700D68E85 /* TOKYO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOKYO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CD30E11E20A1A700D68E85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CD30E31E20A1A700D68E85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -111,13 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				634C39A81E25EEC00060FAB3 /* GoogleSymbolUtilities.framework in Frameworks */,
 				899D6A112804C7C9CF38B62E /* Pods_TOKYO.framework in Frameworks */,
-				634C39A51E25EEC00060FAB3 /* FirebaseAnalytics.framework in Frameworks */,
-				634C39A61E25EEC00060FAB3 /* FirebaseInstanceID.framework in Frameworks */,
-				634C39A71E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework in Frameworks */,
-				63BABB541E25F4B40015C836 /* GoogleMobileAds.framework in Frameworks */,
-				634C39A91E25EEC00060FAB3 /* GoogleUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,12 +109,6 @@
 		63CD30D51E20A1A700D68E85 = {
 			isa = PBXGroup;
 			children = (
-				63BABB531E25F4B40015C836 /* GoogleMobileAds.framework */,
-				634C399F1E25EEC00060FAB3 /* FirebaseAnalytics.framework */,
-				634C39A01E25EEC00060FAB3 /* FirebaseInstanceID.framework */,
-				634C39A11E25EEC00060FAB3 /* GoogleInterchangeUtilities.framework */,
-				634C39A21E25EEC00060FAB3 /* GoogleSymbolUtilities.framework */,
-				634C39A31E25EEC00060FAB3 /* GoogleUtilities.framework */,
 				63CD30E01E20A1A700D68E85 /* TOKYO */,
 				63CD30DF1E20A1A700D68E85 /* Products */,
 				942E2E5E51A110F85B5ADD04 /* Pods */,
@@ -453,7 +429,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "b1286770-bb8d-410a-b303-e7e83f77dc54";
@@ -499,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "b1286770-bb8d-410a-b303-e7e83f77dc54";
 				SDKROOT = iphoneos;
@@ -521,7 +497,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TOKYO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inocci.TOKYO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -543,7 +519,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TOKYO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inocci.TOKYO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,12 +8,9 @@
 
 import UIKit
 import Social
-import GoogleMobileAds
-
 class InfoViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var bannerView: GADBannerView!
     
     let cellTitleArray = ["Twitterでシェア",
                           "Facebookでシェア",
@@ -22,8 +19,8 @@ class InfoViewController: UIViewController {
                           "開発者 Facebookアカウント"]
     
     // 参考-> http://qiita.com/naoyashiga/items/09d9947880f467ed4422
-    let itunesURL: String = "itms-apps://itunes.apple.com/app/1194887658"
-    let reviewUrl: String = "itms-apps:////itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1194887658"
+    let itunesUrl: NSURL = NSURL(string: "itms-apps://itunes.apple.com/app/1194887658")!
+    let reviewUrl: NSURL = NSURL(string: "itms-apps:////itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1194887658")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,37 +59,36 @@ extension InfoViewController {
         tableView.dataSource = self
         
         self.navigationItem.title = "情報"
-        // AdMob
-        bannerView.delegate = self
-        bannerView.adUnitID = "ca-app-pub-4040761063524447/7604354219"
-        bannerView.rootViewController = self
-        bannerView.adSize = kGADAdSizeSmartBannerLandscape
-        bannerView.load(GADRequest())
     }
     
     // 0
     func shareInTwitter() {
-        let text = "アプリでエモいフォントのTOKYO写真を作ろう #TOKYO " + itunesURL
+        let text = "アプリでエモいフォントのTOKYO写真を作ろう #TOKYO "
         let composeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)!
         composeViewController.setInitialText(text)
-        self.present(composeViewController, animated: true, completion: nil)
+        composeViewController.add(itunesUrl as URL!)
+        self.present(composeViewController, animated: true, completion: { action in
+            self.tableView.reloadData()
+        })
     }
     
     // 1
     func shareInFacebook() {
-        let text = "アプリでエモいフォントのTOKYO写真を作ろう #TOKYO " + itunesURL
+        let text = "アプリでエモいフォントのTOKYO写真を作ろう #TOKYO "
         let composeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)!
         composeViewController.setInitialText(text)
-        self.present(composeViewController, animated: true, completion: nil)
+        composeViewController.add(itunesUrl as URL!)
+        self.present(composeViewController, animated: true, completion: { action in
+            self.tableView.reloadData()
+        })
     }
     
     // 2
     func writeReview() {
-        let url = NSURL(string: reviewUrl)
         if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url as! URL, options: [:], completionHandler: nil)
+            UIApplication.shared.open(reviewUrl as URL, options: [:], completionHandler: nil)
         } else {
-            UIApplication.shared.openURL(url as! URL)
+            UIApplication.shared.openURL(reviewUrl as URL)
         }
     }
     
@@ -137,39 +133,3 @@ extension InfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
-extension InfoViewController: GADBannerViewDelegate {
-    
-    // Called when an ad request loaded an ad.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called when an ad request failed.
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("\(#function): \(error.localizedDescription)")
-    }
-    
-    // Called just before presenting the user a full screen view, such as a browser, in response to
-    // clicking on an ad.
-    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called just before dismissing a full screen view.
-    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called just after dismissing a full screen view.
-    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-    
-    // Called just before the application will background or terminate because the user clicked on an
-    // ad that will launch another application (such as the App Store).
-    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-        print(#function)
-    }
-}
-
