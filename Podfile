@@ -8,7 +8,9 @@ target 'TOKYO' do
   # Pods for TOKYO
 
   pod 'Firebase'
+  pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 
 end

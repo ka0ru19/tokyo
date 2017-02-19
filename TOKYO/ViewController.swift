@@ -19,11 +19,16 @@ class ViewController: UIViewController {
     
     let fontFamilyNamesArray = UIFont.familyNames // font名のarray
     
+    let ud = UserDefaults.standard
+    
     var ref : FIRDatabaseReference!
+    //    let storage = FIRStorage.storage()
     
     var sourceImage: UIImage! // もともとの写真
     var tokyoText: String? // 合成するテキスト
     var tokyoFontName: String? // 選択されたfont名
+    
+    var user =  UserModel()
     
     // 拡大率
     var zoomNow:CGFloat=1.0
@@ -33,6 +38,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference().child("list").child("selectedFont")
+        initUser()
         initView()
     }
     
@@ -54,12 +60,56 @@ class ViewController: UIViewController {
     }
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
         
-        let tokyoImage: UIImage = makeTokyoImage()
+//        let tokyoImage: UIImage = makeTokyoImage()
         
-        let activityVC = UIActivityViewController(activityItems: [tokyoImage,"#TOKYO "],
+        // Firebaseに情報を保存
+        setDataToFirebase(fontname: tokyoFontName ?? "", text: tokyoText ?? "")
+        
+        let alert = UIAlertController(title: "共有先を選択", message: "このアプリではすべての人が投稿を閲覧できます", preferredStyle: .actionSheet)
+        
+        let shareOnHere: UIAlertAction = UIAlertAction(title: "このアプリ上でシェア", style: .default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.displayShareHere()
+        })
+        
+        let shareOnSNS: UIAlertAction = UIAlertAction(title: "他のSNSでシェア", style: .default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.displayActivityVC()
+        })
+        // Cancelボタン
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel", style: .cancel, handler:{
+            (action: UIAlertAction!) -> Void in
+            print("cancelAction")
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(shareOnHere)
+        alert.addAction(shareOnSNS)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    // 「このアプリでShare」
+    func displayShareHere() {
+        
+        if let uid = ud.object(forKey: "uid") {
+            print(user)
+            let newPost = PostModel()
+            newPost.image = makeTokyoImage()
+            newPost.upLoad(user: user, image: makeTokyoImage())
+        } else {
+            performSegue(withIdentifier: "toSignUp", sender: nil)
+        }
+
+        
+    }
+    
+    //「その他のShare」
+    func displayActivityVC() {
+        let activityVC = UIActivityViewController(activityItems: [makeTokyoImage(),"#TOKYO "],
                                                   applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
-        
     }
     
     func makeTokyoImage() -> UIImage {
@@ -79,9 +129,6 @@ class ViewController: UIViewController {
             font = UIFont.boldSystemFont(ofSize: fontSize)
         }
         
-        // Firebaseに情報を保存
-        setDataToFirebase(fontname: font.fontName, text: tokyoText)
-        
         textStyle.alignment = NSTextAlignment.center
         let textFontAttributes = [
             NSFontAttributeName: font ,
@@ -98,7 +145,7 @@ class ViewController: UIViewController {
         // 描き出す位置と大きさの設定 CGRect([左からのx座標]px, [上からのy座標]px, [縦の長さ]px, [横の長さ]px)
         //let margin: CGFloat = 5.0 // 余白
         var textRect  = CGRect(x: 0, y: 0, width: 0, height: 0)
-//        textRect.size = sourceImage.size
+        //        textRect.size = sourceImage.size
         textRect.size = CGSize(width: sourceImage.size.width * zoomNow,
                                height: sourceImage.size.height * zoomNow)
         textRect.origin = CGPoint(x: (sourceImage.size.width / 2 ) - (fontSize * CGFloat(tokyoText.characters.count) / 2),
@@ -125,7 +172,7 @@ class ViewController: UIViewController {
         formatter.locale = Locale(identifier: "ja_JP")
         formatter.dateStyle = .medium // -> ex: 2016/10/29
         formatter.timeStyle = .medium // -> ex: 13:20:08
-
+        
         let formattedDate = formatter.string(from: now)
         
         ref.childByAutoId().setValue(["name": fontname,
@@ -133,12 +180,13 @@ class ViewController: UIViewController {
                                       "date": formattedDate])
     }
     
+    
 }
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         tokyoFontName = fontFamilyNamesArray[indexPath.row]
-//        tokyoTextField.font = UIFont(name: tokyoFontName!, size: 80)!
+        //        tokyoTextField.font = UIFont(name: tokyoFontName!, size: 80)!
         
         imageView.image = makeTokyoImage()
     }
@@ -208,9 +256,6 @@ extension ViewController: UIGestureRecognizerDelegate {
         // 拡大率を適当に決める
         zoomNow += (sender.scale-1) * 0.1
         
-        print("sender.scale: \(sender.scale)")
-        print("zoomNow: \(zoomNow)")
-        
         if zoomNow > zoomMax {
             zoomNow=zoomMax
         }else if zoomNow < zoomMin {
@@ -219,20 +264,38 @@ extension ViewController: UIGestureRecognizerDelegate {
         
         imageView.image = makeTokyoImage()
         
-//        // ピンチ中心座標
-//        var location:CGPoint=sender.locationInView(baseScrollView!)
-//        
-//        // 拡大処理
-//        self.viewZoom(zoomNow, ox:location.x, oy:location.y)
+        //        // ピンチ中心座標
+        //        var location:CGPoint=sender.locationInView(baseScrollView!)
+        //
+        //        // 拡大処理
+        //        self.viewZoom(zoomNow, ox:location.x, oy:location.y)
     }
 }
 
 extension ViewController {
     
     // 初期化
+    func initUser() {
+        if let uid = ud.object(forKey: "uid") {
+            user.getUserInfo(uid: uid as! String)
+        } else {
+            print("未ログイン")
+        }
+        
+//        if let user = UserDelegate.user {
+//            self.user = user
+//        } else {
+//            if UserDelegate.isReading {
+//                print("レスポンス待ち")
+//            } else {
+//                print("読み込みしていい")
+//            }
+//        }
+    }
+    
     func initView() {
-//        tokyoTextField.delegate = self
-//        tokyoTextField.returnKeyType = .done
+        //        tokyoTextField.delegate = self
+        //        tokyoTextField.returnKeyType = .done
         sourceImage = UIImage(named: "sample2.jpg")
         tokyoText = "TOKYO"
         imageView.image = makeTokyoImage()
@@ -247,11 +310,13 @@ extension ViewController {
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "FontSampleCollectionViewCell", bundle: nil),
                                 forCellWithReuseIdentifier: "cell")
+        
         let layout = UICollectionViewFlowLayout()
-        let margin: CGFloat = 4.0
-        layout.itemSize = CGSize(width: self.view.bounds.width / 2 - margin * 2 , height: 60)
-        // Cellのマージン.
-        layout.sectionInset = UIEdgeInsetsMake(0.0, margin, 0.0, margin) //top,left,bottom,rightの余白
+        let numOfLine = 3 // 何行で表示するか
+        let margin: CGFloat = 3.0 // Cellのマージン.
+        let itemWidth = (self.view.bounds.width - CGFloat(numOfLine - 1) * margin) / CGFloat(numOfLine)
+        layout.itemSize = CGSize(width: itemWidth , height: 56)
+        layout.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) //top,left,bottom,rightの余白
         layout.minimumInteritemSpacing = margin
         collectionView.collectionViewLayout = layout
         
@@ -262,7 +327,7 @@ extension ViewController {
     }
     
     func inputTextAlert() {
-        var alert = UIAlertController(title: "Input Text!", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Input Text!", message: nil, preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Done", style: .default) { (action:UIAlertAction!) -> Void in
             
             // 入力したテキストをコンソールに表示

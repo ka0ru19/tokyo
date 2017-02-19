@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="detailCell" id="gTV-IL-0wX" customClass="PictureDetailCollectionViewCell" customModule="TOKYO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="322"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="290" height="322"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kZu-UE-5Wl">
+                        <rect key="frame" x="0.0" y="0.0" width="290" height="290"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="kZu-UE-5Wl" secondAttribute="height" multiplier="1:1" id="HI1-TV-rq8"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Qe-Ee-znl">
+                        <rect key="frame" x="0.0" y="292" width="290" height="36"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="oYu-8z-SAM">
+                                <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="02f-Xx-jaL"/>
+                                    <constraint firstAttribute="width" constant="36" id="uYp-q6-i6v"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kv8-Uz-te7">
+                                <rect key="frame" x="36" y="0.0" width="130" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="UgK-I4-0hU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsW-RY-WqN">
+                                <rect key="frame" x="166" y="0.0" width="64" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="70I-EC-2fc"/>
+                                    <constraint firstAttribute="height" constant="36" id="z8S-gS-ftA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snv-vs-8lJ">
+                                <rect key="frame" x="230" y="0.0" width="60" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="BtO-5T-KaW"/>
+                                    <constraint firstAttribute="height" constant="36" id="K9B-mB-9pY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Like❤"/>
+                                <connections>
+                                    <action selector="likeButtonWithSender:" destination="gTV-IL-0wX" eventType="touchUpInside" id="5Ht-wK-jQI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="C2H-pj-bkn"/>
+                        </constraints>
+                    </stackView>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i5F-og-sCC">
+                        <rect key="frame" x="0.0" y="327" width="290" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ja7-Xi-3gg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="5Qe-Ee-znl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0Gi-6w-qyy"/>
+                <constraint firstAttribute="trailing" secondItem="5Qe-Ee-znl" secondAttribute="trailing" id="6qC-WG-NKk"/>
+                <constraint firstItem="kZu-UE-5Wl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9aR-4g-wG7"/>
+                <constraint firstAttribute="bottom" secondItem="5Qe-Ee-znl" secondAttribute="bottom" constant="3" id="HH4-9S-ohn"/>
+                <constraint firstItem="kZu-UE-5Wl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Syc-Uv-thG"/>
+                <constraint firstAttribute="trailing" secondItem="kZu-UE-5Wl" secondAttribute="trailing" id="W22-PH-cbI"/>
+                <constraint firstItem="i5F-og-sCC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="niy-Sa-PJr"/>
+                <constraint firstAttribute="trailing" secondItem="i5F-og-sCC" secondAttribute="trailing" id="ser-en-gYt"/>
+                <constraint firstAttribute="bottom" secondItem="i5F-og-sCC" secondAttribute="bottom" id="yMP-sI-DB0"/>
+            </constraints>
+            <size key="customSize" width="280" height="284"/>
+            <connections>
+                <outlet property="imageView" destination="kZu-UE-5Wl" id="l66-kY-9xd"/>
+                <outlet property="nameLabel" destination="kv8-Uz-te7" id="ztV-kG-Na7"/>
+                <outlet property="numOfLikeLabel" destination="OsW-RY-WqN" id="cdC-VU-Y7k"/>
+            </connections>
+            <point key="canvasLocation" x="150" y="171"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="person_blue.png" width="256" height="256"/>
+    </resources>
+</document>
