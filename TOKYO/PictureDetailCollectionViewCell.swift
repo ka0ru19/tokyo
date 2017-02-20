@@ -27,9 +27,13 @@ class PictureDetailCollectionViewCell: UICollectionViewCell {
     
     var delegate: DetailCellDelegate?
     
+    var selfUid: String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        selfUid = ud.object(forKey: "uid") as? String
     }
 
     @IBAction func likeButtonTapped(sender: UIButton) {
@@ -39,11 +43,13 @@ class PictureDetailCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        if isLike {
+        if isLike { // like -> unlike
             isLike = false
             likeButton.setImage(UIImage(named: "blackHeart.png"), for: .normal)
             countOfLike -= 1
-        } else {
+            post.unlike(uid: uid)
+        }
+        else { // unlike -> like
             isLike = true
             likeButton.setImage(UIImage(named: "redHeart.png"), for: .normal)
             countOfLike += 1
@@ -58,7 +64,19 @@ class PictureDetailCollectionViewCell: UICollectionViewCell {
         self.post = post
         imageView.image = post.image
         nameLabel.text = post.userName
+        countOfLike = post.likeUidArray.count
         numOfLikeLabel.text = String(countOfLike)
+        
+        likeButton.setImage(UIImage(named: "blackHeart.png"), for: .normal)
+        if selfUid != nil {
+            for uid in post.likeUidArray {
+                if selfUid == uid {
+                    isLike = true
+                    likeButton.setImage(UIImage(named: "redHeart.png"), for: .normal)
+                    break
+                }
+            }
+        }
     }
     
     func showAlertOnVC() {

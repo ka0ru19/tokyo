@@ -16,8 +16,9 @@ class PostModel {
     var userName: String = "" // ユーザ名
     var image: UIImage!
     var countOfLike: Int = 0
+    var likeUidArray: [String] = []
     
-    func upLoad(user: UserModel, image: UIImage) {
+    func upLoad(user: UserModel, image: UIImage, vc: ViewController) {
         
         let pictureRef = FIRDatabase.database().reference().child("list").child("picture")
         let newRef = pictureRef.childByAutoId()
@@ -38,9 +39,11 @@ class PostModel {
                 if let data = metaData {
                     print("up成功->\(data)")
                     user.getUserInfo(uid: user.uid) // userDataの更新
+                    vc.successUpLoad()
                 }
                 if let theError = error {
-                    print("up失敗->(theError)")
+                    print(theError)
+                    vc.failureUpLoad(errorMessage: "ネットワークに問題の可能性")
                 }
             })
         }
@@ -48,7 +51,7 @@ class PostModel {
     }
     
     func getResizedImage(image: UIImage) -> Data? {
-        let maxSize: Float = 80 * 1024 // 160 KB = 0.160 MB
+        let maxSize: Float = 70 * 1024 // 70 KB = 0.070 MB
         let originalImage = image
         let originalData: NSData = NSData(data: UIImageJPEGRepresentation(originalImage, 1.0)!)
         let rate = Float(originalData.length) / maxSize
@@ -58,14 +61,15 @@ class PostModel {
         return UIImageJPEGRepresentation(originalImage, CGFloat(1 / reduction))
     }
     
-    func like(uid: String?) {
+    func like(uid: String) {
         
         let pictureRef = FIRDatabase.database().reference().child("list/picture/\(self.postId)/likeUid")
-        pictureRef.child(uid ?? "Anonymous User").setValue(["date": getNowDateString()])
+        pictureRef.child(uid).setValue(["date": getNowDateString()])
     }
     
-    func unlike(uid: String?) {
-        
+    func unlike(uid: String) {
+        let pictureRef = FIRDatabase.database().reference().child("list/picture/\(self.postId)/likeUid")
+        pictureRef.child(uid).removeValue()
     }
     
     func getNowDateString() -> String {

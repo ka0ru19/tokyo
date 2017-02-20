@@ -28,6 +28,8 @@ class ViewController: UIViewController {
     var tokyoText: String? // 合成するテキスト
     var tokyoFontName: String? // 選択されたfont名
     
+    var indicator = UIActivityIndicatorView() // くるくる
+    
     var user =  UserModel()
     
     // 拡大率
@@ -86,6 +88,9 @@ class ViewController: UIViewController {
         alert.addAction(shareOnHere)
         alert.addAction(shareOnSNS)
         
+        // iPadのクラッシュ回避策
+        alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+
         present(alert, animated: true, completion: nil)
         
     }
@@ -94,10 +99,10 @@ class ViewController: UIViewController {
     func displayShareHere() {
         
         if let uid = ud.object(forKey: "uid") {
-            print(user)
+            startIndicator() // くるくる開始 -> successUpLoad()にて終了
             let newPost = PostModel()
             newPost.image = makeTokyoImage()
-            newPost.upLoad(user: user, image: makeTokyoImage())
+            newPost.upLoad(user: user, image: makeTokyoImage(), vc: self)
         } else {
             performSegue(withIdentifier: "toSignUp", sender: nil)
         }
@@ -110,6 +115,20 @@ class ViewController: UIViewController {
         let activityVC = UIActivityViewController(activityItems: [makeTokyoImage(),"#TOKYO "],
                                                   applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    func successUpLoad() {
+        stopIndicator()
+    }
+    
+    func failureUpLoad(errorMessage: String) {
+        stopIndicator()
+        let alertController = UIAlertController( title: "アップロード失敗", message: errorMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+
     }
     
     func makeTokyoImage() -> UIImage {
@@ -349,5 +368,47 @@ extension ViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func startIndicator() {
+        // UIActivityIndicatorViewを生成
+        indicator = UIActivityIndicatorView()
+        
+        // 以下、各種プロパティ設定
+        
+        // indicatorのframeを作成
+        indicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        
+        // frameを角丸にする場合は数値調整
+        indicator.layer.cornerRadius = 8
+        
+        // indicatorのstyle（color）を設定
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        
+        // indicatorのbackgroundColorを設定
+        indicator.backgroundColor = UIColor.darkGray
+        
+        // indicatorの配置を設定
+        indicator.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
+        
+        // indicatorのアニメーションが終了したら自動的にindicatorを非表示にするか否かの設定
+        indicator.hidesWhenStopped = true
+        
+        // indicatorのアニメーションを開始
+        indicator.startAnimating()
+        
+        // 画面操作の無効化
+        self.view.isUserInteractionEnabled = false
+        
+        // viewにindicatorを追加
+        self.view.addSubview(indicator)
+        
+    }
     
+    func stopIndicator() {
+        // indicatorのアニメーションを終了
+        indicator.stopAnimating()
+        
+        // 画面操作の有効化
+        self.view.isUserInteractionEnabled = true
+    }
+
 }

@@ -24,5 +24,5 @@ class PictureCollectionViewCell: UICollectionViewCell {
         imageView.image = post.image
         //image
     }
-
+    
 }

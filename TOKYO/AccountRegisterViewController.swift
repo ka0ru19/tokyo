@@ -17,10 +17,13 @@ class AccountRegisterViewController: UIViewController {
     @IBOutlet weak var newPassTextField: UITextField!
     @IBOutlet weak var newPass2TextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var toLoginButton: UIButton!
     
     let ud = UserDefaults.standard
     
     let user = UserModel()
+    
+    var indicator = UIActivityIndicatorView() // くるくる
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +43,7 @@ class AccountRegisterViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped() {
+        startIndicator()
         register()
     }
     
@@ -99,8 +103,56 @@ extension AccountRegisterViewController {
         signUpButton.layer.borderWidth = 0.5
         signUpButton.layer.borderColor = UIColor.white.cgColor
         
+        toLoginButton.layer.cornerRadius = signUpButton.bounds.size.height / 2
+        toLoginButton.layer.borderWidth = 0.5
+        toLoginButton.layer.borderColor = UIColor.white.cgColor
+        
+    }
+   
+    func startIndicator() {
+        // UIActivityIndicatorViewを生成
+        indicator = UIActivityIndicatorView()
+        
+        // 以下、各種プロパティ設定
+        
+        // indicatorのframeを作成
+        indicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        
+        // frameを角丸にする場合は数値調整
+        indicator.layer.cornerRadius = 8
+        
+        // indicatorのstyle（color）を設定
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        
+        // indicatorのbackgroundColorを設定
+        indicator.backgroundColor = UIColor.darkGray
+        
+        // indicatorの配置を設定
+        indicator.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
+        
+        // indicatorのアニメーションが終了したら自動的にindicatorを非表示にするか否かの設定
+        indicator.hidesWhenStopped = true
+        
+        // indicatorのアニメーションを開始
+        indicator.startAnimating()
+        
+        // 画面操作の無効化
+        self.view.isUserInteractionEnabled = false
+        
+        // viewにindicatorを追加
+        self.view.addSubview(indicator)
+        
     }
     
+    func stopIndicator() {
+        // indicatorのアニメーションを終了
+        indicator.stopAnimating()
+        
+        // 画面操作の有効化
+        self.view.isUserInteractionEnabled = true
+    }
+    
+
 }
 
 // firebaseまわり
@@ -108,16 +160,61 @@ extension AccountRegisterViewController {
     
     func register() {
         // それぞれのtextFieldに値が入力されているか確認
-        guard let newId = newIdTextField.text else { return }
-        guard let signUpEmail = newMailTextField.text else { return }
-        guard let signUpPass = newPassTextField.text else { return }
-        guard let pass2 = newPass2TextField.text else { return }
+        guard
+            let newId = newIdTextField.text,
+            let signUpEmail = newMailTextField.text,
+            let signUpPass = newPassTextField.text ,
+            let pass2 = newPass2TextField.text else {
+                stopIndicator()
+                let alertController = UIAlertController( title: "入力してない項目があります", message: nil, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                return
+        }
+        
+        if !newId.isValidUserId { // 半角英数が不正
+            stopIndicator()
+            // Alert
+            let alertController = UIAlertController( title: "入力に誤りがあります", message: "IDは半角英字3~13字です", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.newIdTextField.text = nil
+                self.newPassTextField.text = nil
+                self.newPass2TextField.text = nil
+            })
+            
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        if !signUpEmail.isValidEmail { // メールアドレスが不正
+            stopIndicator()
+            // Alert
+            let alertController = UIAlertController( title: "入力に誤りがあります", message: "メールアドレスが不正です", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.newMailTextField.text = nil
+                self.newPassTextField.text = nil
+                self.newPass2TextField.text = nil
+            })
+            
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
         
         if signUpPass != pass2 {
+            stopIndicator()
+            // Alert
+            let alertController = UIAlertController( title: "入力に誤りがあります", message: "パスワードが一致しません", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.newPassTextField.text = nil
+                self.newPass2TextField.text = nil
+            })
             
-            print("２つのパスワードが一致しません")
-            newPassTextField.text = ""
-            newPass2TextField.text = ""
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
             return
         }
         
@@ -127,12 +224,20 @@ extension AccountRegisterViewController {
     
     
     func successNewAccountRegister() {
+        stopIndicator()
         self.performSegue(withIdentifier: "toLogin", sender: nil)
     }
     
     func failureNewHSRegister(errorMessage: String) {
-        print("failureNewHSRegister: \(errorMessage)")
+        stopIndicator()
+        let alertController = UIAlertController( title: "Sign Up Failure", message: errorMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+        
     }
+    
     
     
 }
