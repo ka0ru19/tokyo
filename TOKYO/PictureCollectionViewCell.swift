@@ -13,13 +13,16 @@ class PictureCollectionViewCell: UICollectionViewCell {
     // storyBoardでAspectFitに設定
     @IBOutlet weak var imageView: UIImageView!
     
+    var post = PostModel()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func setCell(image: UIImage){
-        imageView.image = image
+    func setCell(post: PostModel){
+        imageView.image = post.image
+        //image
     }
 
 }

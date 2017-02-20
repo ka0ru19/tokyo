@@ -15,7 +15,6 @@ class TimeLineViewController: UIViewController {
     
     var pictureKeyArray: [String] = []
     var postArray: [PostModel] = []
-//    var imageArray: [UIImage] = []
     
     let multiDisplayNum = 3
     var numOfDispayLine = 3 // 何行で表示するか // 画像タップで変更
@@ -29,7 +28,6 @@ class TimeLineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         initView()
         readDataFromStorage(startIndex: 0)
@@ -43,19 +41,8 @@ class TimeLineViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
@@ -72,12 +59,13 @@ extension TimeLineViewController {
         
         setCollectionViewLayout()
         
-        refreshControl = UIRefreshControl()
+        refreshControl = UIRefreshControl() // 最上部からの更新
         refreshControl.attributedTitle = NSAttributedString(string: "引っ張って更新")
-        refreshControl.addTarget(self, action: "refresh", for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh), for: .valueChanged)
         collectionView.addSubview(refreshControl)
     }
     
+    // 各cellに1または3行としてcellの配置位置を定義
     func setCollectionViewLayout() {
         if numOfDispayLine == multiDisplayNum {
             let layout = UICollectionViewFlowLayout()
@@ -115,6 +103,7 @@ extension TimeLineViewController {
         startIndicator()
         
         // 第３引数でコールバックとして実行したい関数オブジェクトを受け取る
+        // ここはまだ関数の定義
         func makeArray(callback: (Bool) -> Void) -> Void {
             
             let max = self.numOfNowCells + self.addNumOfCell // max = 30, 60, 90 ...
@@ -127,15 +116,15 @@ extension TimeLineViewController {
                 self.postArray.append(PostModel())
             }
             
-            
             // 処理が終わったら第３引数で受け取った関数を実行。今回はメッセージを渡す
             callback(true)
         }
         
         let listRef = FIRDatabase.database().reference().child("list")
         
+        
+        // ここから処理
         listRef.child("picture").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
             guard let value = snapshot.value as? NSDictionary else {
                 return
             }
@@ -144,76 +133,75 @@ extension TimeLineViewController {
             self.pictureKeyArray = value.allKeys as! [String]
             
             if startIndex == 0 {
-            self.postArray = []
+                self.postArray = []
             }
             
             let storage = FIRStorage.storage()
             let storageRef = storage.reference(forURL: "gs://tokyo-27015.appspot.com")
             
+            print("self.pictureKeyArrayを出力↓")
             print(self.pictureKeyArray)
-//            var post = PostModel()
             
+            // 読み込むだけの空の配列の確保が終わってから
             makeArray(callback: {_ in
                 let startIndex = self.numOfNowCells - self.addNumOfCell < 0 ? 0 : self.numOfNowCells - self.addNumOfCell
                 for i in startIndex ..< self.numOfNowCells  {
-                print(i)
-                let key = self.pictureKeyArray[i]
-                storageRef.child("images/\(key)").data(withMaxSize: 1 * 1024 * 1024) { data, error in
-                    if let imageData = data {
-                        print("data: \(imageData)")
-                        
-                        self.postArray[i].postId = key
-                        let uid = (value[key] as! [String: Any])["postUserUid"] as? String ?? "no uid"
-
-                        self.postArray[i].userUid = uid
-                        
-                        listRef.child("user/\(uid)/id").observeSingleEvent(of: .value, with: { snapshot in
-                            print("Firebase: uidからusername情報取得開始")
+                    // 作った配列に要素を追加していく
+                    print("現在のi: \(i), 全体の進行度: \(i-startIndex)/\(self.numOfNowCells-startIndex)")
+                    let key = self.pictureKeyArray[i]
+                    storageRef.child("images/\(key)").data(withMaxSize: 1 * 1024 * 1024) { data, error in
+                        if let imageData = data {
+                            print("data: \(imageData)")
                             
-                            print(snapshot.value)
+                            self.postArray[i].postId = key
+                            let uid = (value[key] as! [String: Any])["postUserUid"] as? String ?? "no uid"
                             
-                            guard let userNameValue = snapshot.value as? String else{
-//                                post.userName = "匿名"
-                                return
-                            }
-
-                            print(i)
-                            print(userNameValue)
-                            self.postArray[i].userName = userNameValue
+                            self.postArray[i].userUid = uid
                             
+                            listRef.child("user/\(uid)/id").observeSingleEvent(of: .value, with: { snapshot in
+                                print("Firebase: uidからusername情報取得->\(snapshot.value)")
+                                guard let userNameValue = snapshot.value as? String else{
+                                    return
+                                }
+                                
+                                print("\(i):\(userNameValue)")
+                                self.postArray[i].userName = userNameValue
+                                
+                                // もし最後のiならreload
+                                if i == self.numOfNowCells - 1 {
+                                    isReadingUserName = false
+                                    if isReadingImage == false {
+                                        self.stopIndicator()
+                                        self.collectionView.reloadData()
+                                        self.refreshControl.endRefreshing()
+                                    }
+                                    
+                                }
+                                
+                            })
+                            self.postArray[i].image = UIImage(data: imageData)
+                            
+                            // もし最後のiならreload
                             if i == self.numOfNowCells - 1 {
-                            isReadingUserName = false
+                                isReadingImage = false
+                                if isReadingUserName == false {
+                                    self.stopIndicator()
+                                    self.collectionView.reloadData()
+                                    self.refreshControl.endRefreshing()
+                                }
                             }
-                            if isReadingUserName == false && isReadingImage == false {
-                                self.stopIndicator()
-                                self.collectionView.reloadData()
-                                self.refreshControl.endRefreshing()
-                            }
-                        })
-                        self.postArray[i].image = UIImage(data: imageData)
-                        
-                        if i == self.numOfNowCells - 1 {
-                            isReadingImage = false
                         }
-                        if isReadingUserName == false && isReadingImage == false {
-                            self.stopIndicator()
-                            self.collectionView.reloadData()
-                            self.refreshControl.endRefreshing()
+                        if let theError = error {
+                            print(theError)
                         }
-                        
-                    }
-                    if let theError = error {
-                        print(theError)
                     }
                 }
-            }
-
             })
-                    })
+        })
     }
     
     func refresh() {
-        // 更新するコード(webView.reload()など)
+        // 最上部からなので最初のindexから読み込む
         readDataFromStorage(startIndex: 0)
     }
     
@@ -262,6 +250,7 @@ extension TimeLineViewController {
 }
 
 extension TimeLineViewController: UICollectionViewDelegateFlowLayout {
+    // 横に長い写真は上下の幅を削減したかったけど保留。
     //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     //        let imageSize = imageArray[indexPath.row].size
     //        let yokonagaRate: Float = Float(imageSize.width / imageSize.height) // 横長率(高さ/横)
@@ -298,7 +287,7 @@ extension TimeLineViewController: UICollectionViewDataSource {
         if numOfDispayLine == multiDisplayNum {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PictureCollectionViewCell
             
-            cell.setCell(image: postArray[indexPath.row].image)
+            cell.setCell(post: postArray[indexPath.row])
             
             return cell
         }
@@ -307,6 +296,7 @@ extension TimeLineViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! PictureDetailCollectionViewCell
             
             cell.setCell(post: postArray[indexPath.row])
+            cell.delegate = self
             
             return cell
         }
@@ -315,6 +305,17 @@ extension TimeLineViewController: UICollectionViewDataSource {
         }
         
     }
-    
-    
+}
+
+extension TimeLineViewController: DetailCellDelegate {
+    // ログアウト状態でdetailcellのHeartを押した時に呼ばれる
+    func showAlertFromDetailCell() {
+        let alert = UIAlertController(title: "利用できません", message: "ユーザ登録をしてください", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
 }

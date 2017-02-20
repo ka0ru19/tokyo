@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		633DBB5D1E5AE68A00F0B9AC /* blackHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = 633DBB5B1E5AE68A00F0B9AC /* blackHeart.png */; };
+		633DBB5E1E5AE68A00F0B9AC /* redHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = 633DBB5C1E5AE68A00F0B9AC /* redHeart.png */; };
 		635786AE1E5441E400306B0A /* saki1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 635786AD1E5441E400306B0A /* saki1.jpg */; };
 		635786B21E54439800306B0A /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786B11E54439800306B0A /* TimeLineViewController.swift */; };
 		635786B51E54448100306B0A /* PictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786B31E54448100306B0A /* PictureCollectionViewCell.swift */; };
@@ -64,6 +66,8 @@
 		1BA0783DA674BE1CB30D4E41 /* Pods_TOKYO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TOKYO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CEACA8E796D915DEA6D842D /* Pods-TOKYO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TOKYO.release.xcconfig"; path = "Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO.release.xcconfig"; sourceTree = "<group>"; };
 		534E49F6D13585AA8FFED6C1 /* Pods-TOKYO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TOKYO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TOKYO/Pods-TOKYO.debug.xcconfig"; sourceTree = "<group>"; };
+		633DBB5B1E5AE68A00F0B9AC /* blackHeart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackHeart.png; sourceTree = "<group>"; };
+		633DBB5C1E5AE68A00F0B9AC /* redHeart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redHeart.png; sourceTree = "<group>"; };
 		635786AD1E5441E400306B0A /* saki1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = saki1.jpg; sourceTree = "<group>"; };
 		635786B11E54439800306B0A /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		635786B31E54448100306B0A /* PictureCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 				635786AF1E54435D00306B0A /* MakingView */,
 				635786B01E54437900306B0A /* TimeLine */,
 				63CD30E51E20A1A700D68E85 /* Main.storyboard */,
+				633DBB5B1E5AE68A00F0B9AC /* blackHeart.png */,
+				633DBB5C1E5AE68A00F0B9AC /* redHeart.png */,
 				63CD30F51E20B53E00D68E85 /* sample2.jpg */,
 				63CD31031E215D6E00D68E85 /* TokyoLogo1.png */,
 				635786BD1E598F0100306B0A /* person_blue.png */,
@@ -320,6 +326,7 @@
 			files = (
 				63CD30EC1E20A1A700D68E85 /* LaunchScreen.storyboard in Resources */,
 				63CD31041E215D6F00D68E85 /* TokyoLogo1.png in Resources */,
+				633DBB5E1E5AE68A00F0B9AC /* redHeart.png in Resources */,
 				63CD312C1E21621400D68E85 /* Icon-App-57x57@2x.png in Resources */,
 				63CD31211E21621400D68E85 /* Contents.json in Resources */,
 				63CD313A1E21621400D68E85 /* iTunesArtwork@3x.png in Resources */,
@@ -346,6 +353,7 @@
 				635786BE1E598F0100306B0A /* person_blue.png in Resources */,
 				63CD30FA1E21095800D68E85 /* FontSampleCollectionViewCell.xib in Resources */,
 				63CD312B1E21621400D68E85 /* Icon-App-57x57@1x.png in Resources */,
+				633DBB5D1E5AE68A00F0B9AC /* blackHeart.png in Resources */,
 				63CD31231E21621400D68E85 /* Icon-App-20x20@2x.png in Resources */,
 				635786B81E544E7200306B0A /* GoogleService-Info.plist in Resources */,
 				635786B61E54448100306B0A /* PictureCollectionViewCell.xib in Resources */,

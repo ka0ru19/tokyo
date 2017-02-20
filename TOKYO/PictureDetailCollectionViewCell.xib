@@ -35,34 +35,33 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kv8-Uz-te7">
-                                <rect key="frame" x="36" y="0.0" width="130" height="36"/>
+                                <rect key="frame" x="36" y="0.0" width="154" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="UgK-I4-0hU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsW-RY-WqN">
-                                <rect key="frame" x="166" y="0.0" width="64" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsW-RY-WqN">
+                                <rect key="frame" x="190" y="0.0" width="64" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="70I-EC-2fc"/>
                                     <constraint firstAttribute="height" constant="36" id="z8S-gS-ftA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snv-vs-8lJ">
-                                <rect key="frame" x="230" y="0.0" width="60" height="36"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snv-vs-8lJ">
+                                <rect key="frame" x="254" y="0.0" width="36" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="BtO-5T-KaW"/>
+                                    <constraint firstAttribute="width" constant="36" id="BtO-5T-KaW"/>
                                     <constraint firstAttribute="height" constant="36" id="K9B-mB-9pY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Like❤"/>
+                                <state key="normal" image="blackHeart.png"/>
                                 <connections>
-                                    <action selector="likeButtonWithSender:" destination="gTV-IL-0wX" eventType="touchUpInside" id="5Ht-wK-jQI"/>
+                                    <action selector="likeButtonTappedWithSender:" destination="gTV-IL-0wX" eventType="touchUpInside" id="GIP-tY-y4m"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -93,6 +92,7 @@
             <size key="customSize" width="280" height="284"/>
             <connections>
                 <outlet property="imageView" destination="kZu-UE-5Wl" id="l66-kY-9xd"/>
+                <outlet property="likeButton" destination="snv-vs-8lJ" id="xE4-K4-Ka1"/>
                 <outlet property="nameLabel" destination="kv8-Uz-te7" id="ztV-kG-Na7"/>
                 <outlet property="numOfLikeLabel" destination="OsW-RY-WqN" id="cdC-VU-Y7k"/>
             </connections>
@@ -100,6 +100,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="blackHeart.png" width="748" height="695"/>
         <image name="person_blue.png" width="256" height="256"/>
     </resources>
 </document>

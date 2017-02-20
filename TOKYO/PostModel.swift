@@ -18,21 +18,13 @@ class PostModel {
     var countOfLike: Int = 0
     
     func upLoad(user: UserModel, image: UIImage) {
-        // 時刻を取得
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ja_JP")
-        formatter.dateStyle = .medium // -> ex: 2016/10/29
-        formatter.timeStyle = .medium // -> ex: 13:20:08
-        
-        let formattedDate = formatter.string(from: now)
         
         let pictureRef = FIRDatabase.database().reference().child("list").child("picture")
         let newRef = pictureRef.childByAutoId()
         let newKey = newRef.key
         pictureRef.child(newKey).setValue(["postUserUid": user.uid,
                                            "countOfLike": "0",
-                                           "date": formattedDate])
+                                           "date": getNowDateString()])
         let userRef = FIRDatabase.database().reference().child("list/user")
         userRef.child(user.uid).child("postIdArray").child(String(user.postIdCount)).setValue(newKey)
         
@@ -66,5 +58,26 @@ class PostModel {
         return UIImageJPEGRepresentation(originalImage, CGFloat(1 / reduction))
     }
     
+    func like(uid: String?) {
+        
+        let pictureRef = FIRDatabase.database().reference().child("list/picture/\(self.postId)/likeUid")
+        pictureRef.child(uid ?? "Anonymous User").setValue(["date": getNowDateString()])
+    }
+    
+    func unlike(uid: String?) {
+        
+    }
+    
+    func getNowDateString() -> String {
+        // 時刻を取得
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateStyle = .medium // -> ex: 2016/10/29
+        formatter.timeStyle = .medium // -> ex: 13:20:08
+        
+        return formatter.string(from: now)
+
+    }
 
 }
