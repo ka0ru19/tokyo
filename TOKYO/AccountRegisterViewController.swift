@@ -35,6 +35,10 @@ class AccountRegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func barCancelButton(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func signUpButtonTapped() {
         register()
     }

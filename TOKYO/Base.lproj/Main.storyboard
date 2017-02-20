@@ -169,7 +169,7 @@
         <!--Account Register View Controller-->
         <scene sceneID="HCF-a0-i6f">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="x4l-OB-pY6" customClass="AccountRegisterViewController" customModule="TOKYO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountRegister" automaticallyAdjustsScrollViewInsets="NO" id="x4l-OB-pY6" customClass="AccountRegisterViewController" customModule="TOKYO" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LNV-G6-1ga"/>
                         <viewControllerLayoutGuide type="bottom" id="fXd-Xe-n0H"/>
@@ -227,7 +227,7 @@
                                 <rect key="frame" x="111" y="140" width="156" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIB-cr-s4P">
@@ -247,7 +247,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="FRR-vs-Tgs">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4cK-Re-gJA"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4cK-Re-gJA">
+                                            <connections>
+                                                <action selector="barCancelButton:" destination="x4l-OB-pY6" id="eGT-IO-qQ6"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -323,7 +327,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="Nth-5z-t5O">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cuk-qo-Dh8"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cuk-qo-Dh8">
+                                            <connections>
+                                                <action selector="barCancelButton:" destination="7VZ-fg-qaJ" id="OL9-R4-LK1"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -331,7 +339,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="signInButton" destination="KDQ-Qv-Pob" id="Lox-9U-Xey"/>
+                        <outlet property="signInButton" destination="KDQ-Qv-Pob" id="3jq-p2-Xfl"/>
                         <outlet property="userMailTextField" destination="wZ6-AX-75N" id="iBK-oO-35A"/>
                         <outlet property="userPassTextField" destination="dLe-LV-tOJ" id="pNd-vT-bOI"/>
                     </connections>
@@ -371,29 +379,65 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ooq-F4-Ip1">
-                                <rect key="frame" x="0.0" y="64" width="375" height="553"/>
+                                <rect key="frame" x="0.0" y="244" width="375" height="373"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="373" id="dG0-dd-7ef"/>
+                                </constraints>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Xa-RA-m3c">
+                                <rect key="frame" x="0.0" y="72" width="375" height="164"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dx8-r7-a5Z">
+                                        <rect key="frame" x="57" y="32" width="260" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">id: inou
+e-mail: ka0ru3x@gmail.com</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEQ-tr-pCg">
+                                        <rect key="frame" x="57" y="100" width="260" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.29606428950000002" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="ログアウトはこちら">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="accountButtonTapped" destination="9QS-8j-8jn" eventType="touchUpInside" id="ofj-gU-Tpg"/>
+                                            <action selector="onTappedLoginButton" destination="7VZ-fg-qaJ" eventType="touchUpInside" id="iwt-jV-hy9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Ooq-F4-Ip1" secondAttribute="trailing" id="8zF-Re-YsF"/>
                             <constraint firstItem="Hpy-an-Dc8" firstAttribute="top" secondItem="Ooq-F4-Ip1" secondAttribute="bottom" constant="1" id="VkB-la-3kC"/>
+                            <constraint firstItem="Ooq-F4-Ip1" firstAttribute="top" secondItem="0Xa-RA-m3c" secondAttribute="bottom" constant="8" id="bM0-kI-AaP"/>
+                            <constraint firstAttribute="trailing" secondItem="0Xa-RA-m3c" secondAttribute="trailing" id="csG-NL-ufm"/>
                             <constraint firstItem="Ooq-F4-Ip1" firstAttribute="leading" secondItem="XnH-Rx-1N1" secondAttribute="leading" id="iKW-bV-GeX"/>
-                            <constraint firstItem="Ooq-F4-Ip1" firstAttribute="top" secondItem="W9E-cL-8CV" secondAttribute="bottom" id="zIv-7A-RGj"/>
+                            <constraint firstItem="0Xa-RA-m3c" firstAttribute="top" secondItem="W9E-cL-8CV" secondAttribute="bottom" constant="8" id="rBd-Na-q0b"/>
+                            <constraint firstItem="0Xa-RA-m3c" firstAttribute="leading" secondItem="XnH-Rx-1N1" secondAttribute="leading" id="wGb-Vd-Nqn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vvG-1A-Pxw"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="accountButton" destination="ZEQ-tr-pCg" id="b4D-oG-2As"/>
+                        <outlet property="statusLabel" destination="Dx8-r7-a5Z" id="rKY-hq-r6j"/>
                         <outlet property="tableView" destination="Ooq-F4-Ip1" id="Rwv-0f-tIB"/>
                         <segue destination="tvT-NW-Yow" kind="push" identifier="toFontRequest" id="chG-1D-dcl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMq-Qt-23K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1823" y="139"/>
+            <point key="canvasLocation" x="1821.5999999999999" y="138.98050974512745"/>
         </scene>
         <!--Font Request View Controller-->
         <scene sceneID="np3-BN-zbk">

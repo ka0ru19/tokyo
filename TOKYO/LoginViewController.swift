@@ -34,6 +34,12 @@ class LoginViewController: UIViewController {
         login()
     }
     
+    @IBAction func barCancelButton(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+
+    
     func login() {
         guard let signInEmail = userMailTextField.text else { return }
         guard let signInPass = userPassTextField.text else { return }

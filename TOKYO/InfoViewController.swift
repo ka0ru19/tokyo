@@ -8,9 +8,13 @@
 
 import UIKit
 import Social
+import Firebase
 class InfoViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var accountButton: UIButton!
     
     let cellTitleArray = ["Twitterでシェア",
                           "Facebookでシェア",
@@ -22,12 +26,24 @@ class InfoViewController: UIViewController {
     let itunesUrl: NSURL = NSURL(string: "itms-apps://itunes.apple.com/app/1194887658")!
     let reviewUrl: NSURL = NSURL(string: "itms-apps:////itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1194887658")!
 
+    let ud = UserDefaults.standard
+    var user = UserModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initView()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let uid = ud.object(forKey: "uid") as? String {
+            user.getUserIdAndEmail(uid: uid, vc: self) // 完了したらsuccessGetUserInfo()が呼ばれる
+        } else {
+            statusLabel.text = "アカウントを作成しましょう！\n1分ほどで簡単に作成できます"
+            accountButton.setTitle("Sgin up / Sign In", for: .normal)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,6 +55,18 @@ class InfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func accountButtonTapped() {
+        if (ud.object(forKey: "uid") as? String) != nil { //ログイン中
+            ud.removeObject(forKey: "uid")
+            user.logOut(vc: self)
+            statusLabel.text = "アカウントを作成しましょう！\n1分ほどで簡単に作成できます"
+            accountButton.setTitle("Sgin up / Sign In", for: .normal)
+        } else {
+            let storyboard: UIStoryboard = self.storyboard!
+            let nextView = storyboard.instantiateViewController(withIdentifier: "AccountRegister") as! AccountRegisterViewController
+            self.present(nextView, animated: true, completion: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -49,6 +77,11 @@ class InfoViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func successGetUserInfo(){
+        statusLabel.text = "id: \(user.id!)\nmail: \(user.email!)"
+        accountButton.setTitle("ログアウト", for: .normal)
+    }
 
 }
 
