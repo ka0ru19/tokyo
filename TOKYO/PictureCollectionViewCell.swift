@@ -21,6 +21,7 @@ class PictureCollectionViewCell: UICollectionViewCell {
     }
     
     func setCell(post: PostModel){
+        self.post = post
         imageView.image = post.image
         //image
     }

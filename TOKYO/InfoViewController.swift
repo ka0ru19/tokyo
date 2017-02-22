@@ -39,10 +39,10 @@ class InfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if let uid = ud.object(forKey: "uid") as? String {
-            user.getUserIdAndEmail(uid: uid, vc: self) // 完了したらsuccessGetUserInfo()が呼ばれる
+            user.getUserIdAndEmail(uid: uid, vc: self) // 完了したらsuccessGetUserIdAndEmail()が呼ばれる
         } else {
             statusLabel.text = "アカウントを作成しましょう！\n1分ほどで簡単に作成できます"
-            accountButton.setTitle("Sgin up / Sign In", for: .normal)
+            accountButton.setTitle("Sign up / Sign In", for: .normal)
         }
     }
     
@@ -60,7 +60,7 @@ class InfoViewController: UIViewController {
             ud.removeObject(forKey: "uid")
             user.logOut(vc: self)
             statusLabel.text = "アカウントを作成しましょう！\n1分ほどで簡単に作成できます"
-            accountButton.setTitle("Sgin up / Sign In", for: .normal)
+            accountButton.setTitle("Sign up / Sign In", for: .normal)
         } else {
             let storyboard: UIStoryboard = self.storyboard!
             let nextView = storyboard.instantiateViewController(withIdentifier: "AccountRegister") as! AccountRegisterViewController
@@ -78,8 +78,8 @@ class InfoViewController: UIViewController {
     }
     */
     
-    func successGetUserInfo(){
-        statusLabel.text = "id: \(user.id!)\nmail: \(user.email!)"
+    func successGetUserIdAndEmail(){
+        statusLabel.text = "id: \(user.id)\nmail: \(user.email)"
         accountButton.setTitle("ログアウト", for: .normal)
     }
 

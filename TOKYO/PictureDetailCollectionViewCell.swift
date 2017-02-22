@@ -19,21 +19,20 @@ class PictureDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var numOfLikeLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     
-    var countOfLike = 0
-    var post = PostModel()
-    var isLike = false
+    var countOfLike: Int = 0
+
+    var post: PostModel!
+    var isLike: Bool = false
     
     let ud = UserDefaults.standard
     
     var delegate: DetailCellDelegate?
     
-    var selfUid: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        selfUid = ud.object(forKey: "uid") as? String
+        // 基本的に使いまわしで何度も新たに生成されるわけじゃないからここに何か書くときは要注意
     }
 
     @IBAction func likeButtonTapped(sender: UIButton) {
@@ -67,15 +66,24 @@ class PictureDetailCollectionViewCell: UICollectionViewCell {
         countOfLike = post.likeUidArray.count
         numOfLikeLabel.text = String(countOfLike)
         
-        likeButton.setImage(UIImage(named: "blackHeart.png"), for: .normal)
-        if selfUid != nil {
-            for uid in post.likeUidArray {
-                if selfUid == uid {
+        if let selfUid = ud.object(forKey: "uid") as? String {
+            
+            nameLabel.textColor = UIColor.black // 投稿の名前はデフォルトで黒文字
+            if selfUid == post.userUid {
+                nameLabel.textColor = UIColor.blue // 自分の投稿なら名前を青文字にする
+            }
+            
+            isLike = false // likeはデフォルトでfalse
+            likeButton.setImage(UIImage(named: "blackHeart.png"), for: .normal) // Heartはデフォルトで黒
+            for likeUid in post.likeUidArray {
+                if selfUid == likeUid { // 自分が既にlikeしていたらHeartを赤くする
                     isLike = true
                     likeButton.setImage(UIImage(named: "redHeart.png"), for: .normal)
                     break
                 }
             }
+        } else {
+            print("udにuidがありませんでした")
         }
     }
     

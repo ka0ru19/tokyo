@@ -16,13 +16,13 @@
 		635786B21E54439800306B0A /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786B11E54439800306B0A /* TimeLineViewController.swift */; };
 		635786B51E54448100306B0A /* PictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786B31E54448100306B0A /* PictureCollectionViewCell.swift */; };
 		635786B61E54448100306B0A /* PictureCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635786B41E54448100306B0A /* PictureCollectionViewCell.xib */; };
-		635786B81E544E7200306B0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 635786B71E544E7200306B0A /* GoogleService-Info.plist */; };
 		635786BB1E598D0F00306B0A /* PictureDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786B91E598D0F00306B0A /* PictureDetailCollectionViewCell.swift */; };
 		635786BC1E598D0F00306B0A /* PictureDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635786BA1E598D0F00306B0A /* PictureDetailCollectionViewCell.xib */; };
 		635786BE1E598F0100306B0A /* person_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 635786BD1E598F0100306B0A /* person_blue.png */; };
 		635786C01E59902A00306B0A /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786BF1E59902A00306B0A /* PostModel.swift */; };
 		635786C21E5992C400306B0A /* AccountRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786C11E5992C400306B0A /* AccountRegisterViewController.swift */; };
 		635786C41E5993F000306B0A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635786C31E5993F000306B0A /* UserModel.swift */; };
+		6376CF251E5BF104005E8F61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6376CF241E5BF104005E8F61 /* GoogleService-Info.plist */; };
 		63CD09CF1E59AC5E0069C9B6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD09CE1E59AC5E0069C9B6 /* LoginViewController.swift */; };
 		63CD09D11E59CA8B0069C9B6 /* UserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD09D01E59CA8B0069C9B6 /* UserDelegate.swift */; };
 		63CD30E21E20A1A700D68E85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD30E11E20A1A700D68E85 /* AppDelegate.swift */; };
@@ -78,13 +78,14 @@
 		635786B11E54439800306B0A /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		635786B31E54448100306B0A /* PictureCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCollectionViewCell.swift; sourceTree = "<group>"; };
 		635786B41E54448100306B0A /* PictureCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureCollectionViewCell.xib; sourceTree = "<group>"; };
-		635786B71E544E7200306B0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		635786B91E598D0F00306B0A /* PictureDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		635786BA1E598D0F00306B0A /* PictureDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		635786BD1E598F0100306B0A /* person_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_blue.png; sourceTree = "<group>"; };
 		635786BF1E59902A00306B0A /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		635786C11E5992C400306B0A /* AccountRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountRegisterViewController.swift; sourceTree = "<group>"; };
 		635786C31E5993F000306B0A /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		6376CF231E5BE258005E8F61 /* TOKYO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TOKYO.entitlements; sourceTree = "<group>"; };
+		6376CF241E5BF104005E8F61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63CD09CE1E59AC5E0069C9B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		63CD09D01E59CA8B0069C9B6 /* UserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDelegate.swift; sourceTree = "<group>"; };
 		63CD30DE1E20A1A700D68E85 /* TOKYO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOKYO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,6 +186,7 @@
 		63CD30E01E20A1A700D68E85 /* TOKYO */ = {
 			isa = PBXGroup;
 			children = (
+				6376CF231E5BE258005E8F61 /* TOKYO.entitlements */,
 				63CD30E11E20A1A700D68E85 /* AppDelegate.swift */,
 				63CD09D01E59CA8B0069C9B6 /* UserDelegate.swift */,
 				633DBB5F1E5B265B00F0B9AC /* StringExtension.swift */,
@@ -206,7 +208,7 @@
 				63CD31051E21621300D68E85 /* iconImages */,
 				63CD30E81E20A1A700D68E85 /* Assets.xcassets */,
 				63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */,
-				635786B71E544E7200306B0A /* GoogleService-Info.plist */,
+				6376CF241E5BF104005E8F61 /* GoogleService-Info.plist */,
 				63CD30ED1E20A1A700D68E85 /* Info.plist */,
 			);
 			path = TOKYO;
@@ -307,6 +309,11 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 44KX7M22LP;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -359,12 +366,12 @@
 				63CD31381E21621400D68E85 /* iTunesArtwork@1x.png in Resources */,
 				63CD30E71E20A1A700D68E85 /* Main.storyboard in Resources */,
 				63CD31261E21621400D68E85 /* Icon-App-29x29@2x.png in Resources */,
+				6376CF251E5BF104005E8F61 /* GoogleService-Info.plist in Resources */,
 				635786BE1E598F0100306B0A /* person_blue.png in Resources */,
 				63CD30FA1E21095800D68E85 /* FontSampleCollectionViewCell.xib in Resources */,
 				63CD312B1E21621400D68E85 /* Icon-App-57x57@1x.png in Resources */,
 				633DBB5D1E5AE68A00F0B9AC /* blackHeart.png in Resources */,
 				63CD31231E21621400D68E85 /* Icon-App-20x20@2x.png in Resources */,
-				635786B81E544E7200306B0A /* GoogleService-Info.plist in Resources */,
 				635786B61E54448100306B0A /* PictureCollectionViewCell.xib in Resources */,
 				63CD312A1E21621400D68E85 /* Icon-App-40x40@3x.png in Resources */,
 				63CD31311E21621400D68E85 /* Icon-App-72x72@2x.png in Resources */,
@@ -516,7 +523,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "b1286770-bb8d-410a-b303-e7e83f77dc54";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -561,7 +569,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b1286770-bb8d-410a-b303-e7e83f77dc54";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -573,6 +582,7 @@
 			baseConfigurationReference = 534E49F6D13585AA8FFED6C1 /* Pods-TOKYO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TOKYO/TOKYO.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 44KX7M22LP;
@@ -596,6 +606,7 @@
 			baseConfigurationReference = 1CEACA8E796D915DEA6D842D /* Pods-TOKYO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TOKYO/TOKYO.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 44KX7M22LP;

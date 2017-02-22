@@ -11,9 +11,9 @@ import UIKit
 import Firebase
 
 class UserModel {
-    var uid: String! // ユニークID AuthでFirebaseが自動で決定する
-    var id: String! // 半角3~13文字 ユーザが任意で決める
-    var email: String! //
+    var uid: String = "" // ユニークID AuthでFirebaseが自動で決定する
+    var id: String = "" // 半角3~13文字 ユーザが任意で決める
+    var email: String = "" //
     var postIdArray: [String] = []
     var likePostIdArray: [String] = []
     var postIdCount: Int! // これはfirebaseで管理しない
@@ -106,7 +106,7 @@ class UserModel {
             self.id = userValue["id"] as! String
             self.email = userValue["email"] as! String
             
-            vc.successGetUserInfo()
+            vc.successGetUserIdAndEmail()
             
             // 1/2-3/3.
             //            self.firReadUserFinishDelegate?.readUserFinish(self)
@@ -118,7 +118,6 @@ class UserModel {
     func logOut(vc: UIViewController) {
         do {
             try FIRAuth.auth()?.signOut()
-            ud.removeObject(forKey: "uid")
         } catch {
             print("error")
         }

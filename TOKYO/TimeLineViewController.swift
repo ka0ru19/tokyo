@@ -21,14 +21,18 @@ class TimeLineViewController: UIViewController {
     var numOfDispayLine = 3 // 何行で表示するか // 画像タップで変更
     
     var numOfNowCells = 0 // 現在表示されているcellの個数
-    let addNumOfCell = 18 // 更新で追加して読み込むcellの個数 // 基本は30
+    let addNumOfCell = 18 // 更新で追加して読み込むcellの個数 // 基本は18
     let maxNumOfCell = 3000 //上限
     
     var refreshControl:UIRefreshControl! // 最上部を引っ張って読み込む
     var indicator = UIActivityIndicatorView() // 最下部を引っ張って読み込むくるくる
     
     var isLoadindCollectionView = false // 読み込み中 -> true
+    var isChangingDisplayNum = false // 表示行の変更中 -> true
     var reConnectButton: UIButton = UIButton()
+    
+    let ud = UserDefaults.standard
+    var user = UserModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +44,7 @@ class TimeLineViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        initUser()
         
     }
     
@@ -52,7 +57,21 @@ class TimeLineViewController: UIViewController {
 
 extension TimeLineViewController {
     
-    // 初期化
+    func initUser() {
+        if let uid = ud.object(forKey: "uid") as? String {
+            if uid != user.uid {
+                user.getUserInfo(uid: uid)
+                collectionView.reloadData()
+            } else { // 同じなら何もしない
+            }
+        } else {
+            user = UserModel()
+            print("未ログイン")
+            collectionView.reloadData()
+        }
+    }
+    
+    // viewの初期化
     func initView() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -71,24 +90,21 @@ extension TimeLineViewController {
     
     // 各cellに1または3行としてcellの配置位置を定義
     func setCollectionViewLayout() {
-        if numOfDispayLine == multiDisplayNum {
-            let layout = UICollectionViewFlowLayout()
-            let margin: CGFloat = 2.0 // Cellのマージン.
+        let layout = UICollectionViewFlowLayout()
+        let margin: CGFloat = 2.0 // Cellのマージン.
+        
+        if numOfDispayLine == multiDisplayNum { // 複数行表示のとき
             let itemLength = (self.view.bounds.width - CGFloat(numOfDispayLine - 1) * margin) / CGFloat(numOfDispayLine)
             layout.itemSize = CGSize(width: itemLength , height: itemLength)
-            layout.sectionInset = UIEdgeInsetsMake(0.0, 0.0, margin, 0.0) //top,left,bottom,rightの余白
-            layout.minimumInteritemSpacing = margin
-            collectionView.collectionViewLayout = layout
-            
-        } else if numOfDispayLine == 1 {
-            let layout = UICollectionViewFlowLayout()
-            let margin: CGFloat = 2.0 // Cellのマージン.
+        } else if numOfDispayLine == 1 { // １行表示のとき
             let itemLength = (self.view.bounds.width - CGFloat(numOfDispayLine - 1) * margin) / CGFloat(numOfDispayLine)
             layout.itemSize = CGSize(width: itemLength , height: itemLength + 40)
-            layout.sectionInset = UIEdgeInsetsMake(0.0, 0.0, margin, 0.0) //top,left,bottom,rightの余白
-            layout.minimumInteritemSpacing = margin
-            collectionView.collectionViewLayout = layout
         }
+        
+        layout.sectionInset = UIEdgeInsetsMake(0.0, 0.0, margin, 0.0) //top,left,bottom,rightの余白
+        layout.minimumInteritemSpacing = margin
+        collectionView.collectionViewLayout = layout
+
     }
     
     // 何番目のcellから読み込むか指定
@@ -96,9 +112,15 @@ extension TimeLineViewController {
     func readDataFromStorage(startIndex: Int) {
         
         if indicator.isAnimating {
-            return // 読み込み中なら即関数を抜ける
+            return // 読み込み中なら即関数を抜ける // 複数回この関数が呼ばれるのを防ぐため
         }
         
+        var isReadingUserName = true // すべてのusernameを読み込みが未完了 -> false
+        var isReadingImage = true // すべてのimageを読み込みが未完了 -> false
+        var countOfReadUserName: Int = 0 // makeArrayIndexCount と一致で isReadingUserName をfalseにする
+        var countOfReadImage: Int = 0 // makeArrayIndexCount と一致で image をfalseにする
+        
+        var makeArrayIndexCount: Int! // 新しく追加する配列の要素の数
         // インターネット接続確認
         if CheckReachability(host_name: "google.com") {
             print("インターネットへの接続が確認されました")
@@ -138,67 +160,58 @@ extension TimeLineViewController {
             
         }
         
-        
-        var isReadingUserName = false // すべてのusernameを読み込みが未完了 -> ture
-        var isReadingImage = false // すべてのimageを読み込みが未完了 -> true
-        var makeArrayIndexCount: Int! // 新しく追加する配列の要素の数
-        
-        
         startIndicator()
         
         // 第３引数でコールバックとして実行したい関数オブジェクトを受け取る
-        // ここはまだ関数の定義
+        // ここはまだ関数の宣言
         func makeArray(callback: (Bool) -> Void) -> Void {
-            print(self.pictureKeyArray.count)
-            print(startIndex)
+            print("最初に読み込んだself.pictureKeyArray.count: \(self.pictureKeyArray.count)")
+            print("読み込みを始める最初のindex: \(startIndex)")
             
-            if self.pictureKeyArray.count <= startIndex { // pictureKeyArrayをすべて読み込み済みの場合
+            if self.pictureKeyArray.count <= startIndex {
+                // pictureKeyArrayをすべて読み込み済みの場合
                 self.stopIndicator()
                 self.collectionView.reloadData()
                 self.refreshControl.endRefreshing()
                 self.isLoadindCollectionView = false
                 return
-            } else if startIndex + addNumOfCell < self.pictureKeyArray.count {
+            } else if startIndex + self.addNumOfCell < self.pictureKeyArray.count {
+                // startIndex に self.addNumOfCell を加算してもまだpictureKeyArrayの総数より少ない場合
                 makeArrayIndexCount = addNumOfCell
             } else {
                 makeArrayIndexCount = self.pictureKeyArray.count - startIndex
             }
             
+            print("読み込むpostの数: \(makeArrayIndexCount)")
+            
             // 開始indexから現在表示したいcellのindexまでの配列を準備
-            for i in 0 ..< makeArrayIndexCount {
-                print(i)
+            for _ in 0 ..< makeArrayIndexCount {
                 self.postArray.append(PostModel())
             }
             
             // 処理が終わったら第３引数で受け取った関数を実行。今回はメッセージを渡す
             callback(true)
-        }
+        } // ここまで関数の宣言
         
         let listRef = FIRDatabase.database().reference().child("list")
         
-        if startIndex == 0 + addNumOfCell { // 初回の読み込み
-            
-        } else {
-            
-        }
-        
         // ここから処理
+        // 初回読み込むのときだけしか使わない工程があるので要改善
         listRef.child("picture").observeSingleEvent(of: .value, with: { snapshot in
+            
+            // 終わりのスイッチ
+            isReadingUserName = true
+            isReadingImage = true
             
             guard let value = snapshot.value as? NSDictionary else {
                 self.stopIndicator() // 真ん中のくるくるを停止
                 self.refreshControl.endRefreshing() // 上のくるくるを停止
                 self.isLoadindCollectionView = false // classに設けたスイッチをoff
-                
                 return
             }
             
             self.pictureKeyArray = []
             self.pictureKeyArray = value.allKeys as! [String]
-            
-            if startIndex == 0 {
-                self.postArray = []
-            }
             
             let storage = FIRStorage.storage()
             let storageRef = storage.reference(forURL: "gs://tokyo-27015.appspot.com")
@@ -208,10 +221,12 @@ extension TimeLineViewController {
                 for i in startIndex ..< startIndex + makeArrayIndexCount  {
                     // 作った配列に要素を追加していく
                     print("現在のi: \(i), 全体の進行度: \(i-startIndex)/\(makeArrayIndexCount)")
+                    print("現在のi: \(i), 全体の進行度: \(i-startIndex)/\(self.postArray.count)")
                     let key = self.pictureKeyArray[i]
                     storageRef.child("images/\(key)").data(withMaxSize: 1 * 1024 * 1024) { data, error in
                         if let imageData = data {
                             print("data: \(imageData)")
+                            self.postArray[i].image = UIImage(data: imageData)
                             
                             self.postArray[i].postId = key
                             let keyValue = (value[key] as! [String: Any])
@@ -222,7 +237,6 @@ extension TimeLineViewController {
                             self.postArray[i].likeUidArray = likeArray
                             
                             listRef.child("user/\(uid)/id").observeSingleEvent(of: .value, with: { snapshot in
-                                print("Firebase: uidからusername情報取得->\(snapshot.value)")
                                 guard let userNameValue = snapshot.value as? String else{
                                     return
                                 }
@@ -231,7 +245,7 @@ extension TimeLineViewController {
                                 self.postArray[i].userName = userNameValue
                                 
                                 // もし最後のiならreload
-                                if i == startIndex + makeArrayIndexCount - 1 {
+                                if countOfReadUserName + 1 == makeArrayIndexCount {
                                     isReadingUserName = false
                                     if isReadingImage == false {
                                         self.stopIndicator() // 真ん中のくるくるを停止
@@ -240,12 +254,12 @@ extension TimeLineViewController {
                                         self.isLoadindCollectionView = false // classに設けたスイッチをoff
                                         self.numOfNowCells = startIndex + makeArrayIndexCount
                                     }
+                                } else {
+                                    countOfReadUserName += 1
                                 }
                             })
-                            self.postArray[i].image = UIImage(data: imageData)
-                            
                             // もし最後のiならreload
-                            if i == startIndex + makeArrayIndexCount - 1 {
+                            if countOfReadImage + 1 == makeArrayIndexCount {
                                 isReadingImage = false
                                 if isReadingUserName == false {
                                     self.stopIndicator() // 真ん中のくるくるを停止
@@ -254,6 +268,8 @@ extension TimeLineViewController {
                                     self.isLoadindCollectionView = false // classに設けたスイッチをoff
                                     self.numOfNowCells = startIndex + makeArrayIndexCount
                                 }
+                            } else {
+                                countOfReadImage += 1
                             }
                         }
                         if let theError = error {
@@ -265,8 +281,24 @@ extension TimeLineViewController {
                             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                             
                             alertController.addAction(okAction)
+                            
+                            self.reConnectButton = UIButton()
+                            self.reConnectButton.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
+                            self.reConnectButton.backgroundColor = UIColor.cyan
+                            self.reConnectButton.layer.masksToBounds = true
+                            self.reConnectButton.setTitle("Connect Again", for: .normal)
+                            self.reConnectButton.setTitleColor(UIColor.blue, for: .normal)
+                            self.reConnectButton.layer.cornerRadius = self.reConnectButton.bounds.size.height / 2
+                            self.reConnectButton.layer.position = CGPoint(x: self.view.frame.width * 1/2,
+                                                                          y: self.view.frame.height * 3/4)
+                            self.reConnectButton.addTarget(self,
+                                                           action: #selector(TimeLineViewController.onClickReConnectButton),
+                                                           for: .touchUpInside)
+                            self.view.addSubview(self.reConnectButton)
+                            
+                            
                             self.present(alertController, animated: true, completion: nil)
-
+                            
                         }
                     }
                 }
@@ -276,7 +308,12 @@ extension TimeLineViewController {
     
     func refresh() {
         // 最上部からなので最初のindexから読み込む
-        readDataFromStorage(startIndex: 0)
+        // 表示数を初期設定に戻す
+        numOfNowCells = 0
+        postArray = []
+        pictureKeyArray = []
+        collectionView.reloadData()
+        readDataFromStorage(startIndex: numOfNowCells)
     }
     
     // no Network時に「再接続」ボタンが押された時
@@ -352,6 +389,7 @@ extension TimeLineViewController: UICollectionViewDelegate {
         } else if numOfDispayLine == 1 {
             numOfDispayLine = multiDisplayNum
         }
+        isChangingDisplayNum = true
         
         setCollectionViewLayout()
         collectionView.reloadData()
@@ -361,32 +399,17 @@ extension TimeLineViewController: UICollectionViewDelegate {
         // issue: タップ時のUIが悪い問題
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var reusableview: UICollectionReusableView? = nil
-        if kind == UICollectionElementKindSectionHeader {
-            let headerView: UICollectionReusableView? = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", for: indexPath)
-            
-            reusableview = headerView
-        }
-        else if kind == UICollectionElementKindSectionFooter {
-            let footerView: UICollectionReusableView? = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "FooterView", for: indexPath)
-            
-            reusableview = footerView
-            print("footer")
-        }
-        
-        return reusableview!
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //一番下までスクロールしたかどうか
         if self.collectionView.contentOffset.y
             > (self.collectionView.contentSize.height - self.collectionView.bounds.size.height) {
             //まだ表示するコンテンツが存在するか判定し存在するなら○件分を取得して表示更新する
-            if !isLoadindCollectionView {
+            if !isLoadindCollectionView && !isChangingDisplayNum {
                 print("collectionViewの最下部に到達: 読み込み開始")
                 isLoadindCollectionView = true
                 readDataFromStorage(startIndex: numOfNowCells)
+            } else {
+                isChangingDisplayNum = false
             }
         }
     }
@@ -394,7 +417,11 @@ extension TimeLineViewController: UICollectionViewDelegate {
 
 extension TimeLineViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postArray.count
+        if isLoadindCollectionView {
+            return 0
+        } else {
+            return postArray.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

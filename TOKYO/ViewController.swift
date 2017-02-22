@@ -40,8 +40,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference().child("list").child("selectedFont")
-        initUser()
         initView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        initUser()
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,7 +101,7 @@ class ViewController: UIViewController {
     // 「このアプリでShare」
     func displayShareHere() {
         
-        if let uid = ud.object(forKey: "uid") {
+        if ud.object(forKey: "uid") != nil {
             startIndicator() // くるくる開始 -> successUpLoad()にて終了
             let newPost = PostModel()
             newPost.image = makeTokyoImage()
@@ -283,11 +286,6 @@ extension ViewController: UIGestureRecognizerDelegate {
         
         imageView.image = makeTokyoImage()
         
-        //        // ピンチ中心座標
-        //        var location:CGPoint=sender.locationInView(baseScrollView!)
-        //
-        //        // 拡大処理
-        //        self.viewZoom(zoomNow, ox:location.x, oy:location.y)
     }
 }
 
@@ -295,21 +293,14 @@ extension ViewController {
     
     // 初期化
     func initUser() {
-        if let uid = ud.object(forKey: "uid") {
-            user.getUserInfo(uid: uid as! String)
+        if let uid = ud.object(forKey: "uid") as? String {
+            if uid != user.uid {
+                user.getUserInfo(uid: uid )
+            }
         } else {
+            user = UserModel()
             print("未ログイン")
         }
-        
-//        if let user = UserDelegate.user {
-//            self.user = user
-//        } else {
-//            if UserDelegate.isReading {
-//                print("レスポンス待ち")
-//            } else {
-//                print("読み込みしていい")
-//            }
-//        }
     }
     
     func initView() {
