@@ -75,10 +75,13 @@ extension TimeLineViewController {
     func initView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        //        var autoresizingMask: UIViewAutoresizing = [.flexibleHeight, .flexibleWidth]
+//        collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         collectionView.register(UINib(nibName: "PictureCollectionViewCell", bundle: nil),
                                 forCellWithReuseIdentifier: "cell")
         collectionView.register(UINib(nibName: "PictureDetailCollectionViewCell", bundle: nil),
                                 forCellWithReuseIdentifier: "detailCell")
+        
         
         setCollectionViewLayout()
         
@@ -104,7 +107,7 @@ extension TimeLineViewController {
         layout.sectionInset = UIEdgeInsetsMake(0.0, 0.0, margin, 0.0) //top,left,bottom,rightの余白
         layout.minimumInteritemSpacing = margin
         collectionView.collectionViewLayout = layout
-
+        
     }
     
     // 何番目のcellから読み込むか指定
@@ -125,6 +128,7 @@ extension TimeLineViewController {
         if CheckReachability(host_name: "google.com") {
             print("インターネットへの接続が確認されました")
             collectionView.backgroundColor = UIColor.white
+            reConnectButton = UIButton()
             reConnectButton.isHidden = true
             bgImageView.isHidden = true
         } else {
@@ -170,10 +174,10 @@ extension TimeLineViewController {
             
             if self.pictureKeyArray.count <= startIndex {
                 // pictureKeyArrayをすべて読み込み済みの場合
-                self.stopIndicator()
-                self.collectionView.reloadData()
-                self.refreshControl.endRefreshing()
                 self.isLoadindCollectionView = false
+                self.collectionView.reloadData()
+                self.stopIndicator()
+                self.refreshControl.endRefreshing()
                 return
             } else if startIndex + self.addNumOfCell < self.pictureKeyArray.count {
                 // startIndex に self.addNumOfCell を加算してもまだpictureKeyArrayの総数より少ない場合
@@ -191,7 +195,8 @@ extension TimeLineViewController {
             
             // 処理が終わったら第３引数で受け取った関数を実行。今回はメッセージを渡す
             callback(true)
-        } // ここまで関数の宣言
+        }
+        // ここまで関数の宣言
         
         let listRef = FIRDatabase.database().reference().child("list")
         
@@ -248,10 +253,10 @@ extension TimeLineViewController {
                                 if countOfReadUserName + 1 == makeArrayIndexCount {
                                     isReadingUserName = false
                                     if isReadingImage == false {
-                                        self.stopIndicator() // 真ん中のくるくるを停止
-                                        self.collectionView.reloadData() // collectionviewをreload
-                                        self.refreshControl.endRefreshing() // 上のくるくるを停止
                                         self.isLoadindCollectionView = false // classに設けたスイッチをoff
+                                        self.stopIndicator() // 真ん中のくるくるを停止
+                                        self.refreshControl.endRefreshing() // 上のくるくるを停止
+                                        self.collectionView.reloadData() // collectionviewをreload
                                         self.numOfNowCells = startIndex + makeArrayIndexCount
                                     }
                                 } else {
@@ -262,10 +267,10 @@ extension TimeLineViewController {
                             if countOfReadImage + 1 == makeArrayIndexCount {
                                 isReadingImage = false
                                 if isReadingUserName == false {
-                                    self.stopIndicator() // 真ん中のくるくるを停止
-                                    self.collectionView.reloadData() // collectionviewをreload
-                                    self.refreshControl.endRefreshing() // 上のくるくるを停止
                                     self.isLoadindCollectionView = false // classに設けたスイッチをoff
+                                    self.stopIndicator() // 真ん中のくるくるを停止
+                                    self.refreshControl.endRefreshing() // 上のくるくるを停止
+                                    self.collectionView.reloadData() // collectionviewをreload
                                     self.numOfNowCells = startIndex + makeArrayIndexCount
                                 }
                             } else {
@@ -274,31 +279,55 @@ extension TimeLineViewController {
                         }
                         if let theError = error {
                             print(theError)
-                            self.stopIndicator() // 真ん中のくるくるを停止
-                            self.refreshControl.endRefreshing() // 上のくるくるを停止
-                            self.isLoadindCollectionView = false // classに設けたスイッチをoff
-                            let alertController = UIAlertController(title: "読み込みできません", message: "ネットワークに接続してください", preferredStyle: .alert)
-                            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                            // もし最後のiならreload
+                            if countOfReadUserName + 1 == makeArrayIndexCount {
+                                isReadingUserName = false
+                                if isReadingImage == false {
+                                    self.isLoadindCollectionView = false // classに設けたスイッチをoff
+                                    self.stopIndicator() // 真ん中のくるくるを停止
+                                    self.refreshControl.endRefreshing() // 上のくるくるを停止
+                                    self.collectionView.reloadData() // collectionviewをreload
+                                    self.numOfNowCells = startIndex + makeArrayIndexCount
+                                }
+                            } else {
+                                countOfReadUserName += 1
+                            }
+                            if countOfReadImage + 1 == makeArrayIndexCount {
+                                isReadingImage = false
+                                if isReadingUserName == false {
+                                    self.isLoadindCollectionView = false // classに設けたスイッチをoff
+                                    self.stopIndicator() // 真ん中のくるくるを停止
+                                    self.refreshControl.endRefreshing() // 上のくるくるを停止
+                                    self.collectionView.reloadData() // collectionviewをreload
+                                    self.numOfNowCells = startIndex + makeArrayIndexCount
+                                }
+                            } else {
+                                countOfReadImage += 1
+                            }
                             
-                            alertController.addAction(okAction)
-                            
-                            self.reConnectButton = UIButton()
-                            self.reConnectButton.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
-                            self.reConnectButton.backgroundColor = UIColor.cyan
-                            self.reConnectButton.layer.masksToBounds = true
-                            self.reConnectButton.setTitle("Connect Again", for: .normal)
-                            self.reConnectButton.setTitleColor(UIColor.blue, for: .normal)
-                            self.reConnectButton.layer.cornerRadius = self.reConnectButton.bounds.size.height / 2
-                            self.reConnectButton.layer.position = CGPoint(x: self.view.frame.width * 1/2,
-                                                                          y: self.view.frame.height * 3/4)
-                            self.reConnectButton.addTarget(self,
-                                                           action: #selector(TimeLineViewController.onClickReConnectButton),
-                                                           for: .touchUpInside)
-                            self.view.addSubview(self.reConnectButton)
-                            
-                            
-                            self.present(alertController, animated: true, completion: nil)
-                            
+//                            self.stopIndicator() // 真ん中のくるくるを停止
+//                            self.refreshControl.endRefreshing() // 上のくるくるを停止
+//                            self.isLoadindCollectionView = false // classに設けたスイッチをoff
+//                            let alertController = UIAlertController(title: "読み込みできません", message: "ネットワークに接続してください", preferredStyle: .alert)
+//                            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                            
+//                            alertController.addAction(okAction)
+//                            
+//                            self.reConnectButton = UIButton()
+//                            self.reConnectButton.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
+//                            self.reConnectButton.backgroundColor = UIColor.cyan
+//                            self.reConnectButton.layer.masksToBounds = true
+//                            self.reConnectButton.setTitle("Connect Again", for: .normal)
+//                            self.reConnectButton.setTitleColor(UIColor.blue, for: .normal)
+//                            self.reConnectButton.layer.cornerRadius = self.reConnectButton.bounds.size.height / 2
+//                            self.reConnectButton.layer.position = CGPoint(x: self.view.frame.width * 1/2,
+//                                                                          y: self.view.frame.height * 3/4)
+//                            self.reConnectButton.addTarget(self,
+//                                                           action: #selector(TimeLineViewController.onClickReConnectButton),
+//                                                           for: .touchUpInside)
+//                            self.view.addSubview(self.reConnectButton)
+//                            
+//                            self.present(alertController, animated: true, completion: nil)
                         }
                     }
                 }
@@ -365,6 +394,37 @@ extension TimeLineViewController {
         // 画面操作の有効化
         self.view.isUserInteractionEnabled = true
     }
+    
+    func deletePost(post: PostModel) {
+        
+        // データベースから削除
+//        let postModel = PostModel()
+//        postModel.deletePostById(id: post.postId)
+
+        post.deleteSelf()
+        
+        // ローカルでの削除処理
+        
+        for i in 0 ..< postArray.count {
+            if post.postId == postArray[i].postId {
+                postArray.remove(at: i)
+                break
+            }
+        }
+        
+        collectionView.reloadData()
+        
+        for i in 0 ..< pictureKeyArray.count {
+            if post.postId == pictureKeyArray[i] {
+                pictureKeyArray.remove(at: i)
+                break
+            }
+        }
+    }
+    
+    func spamPost(id: String) {
+        PostModel().spamPostById(id: id)
+    }
 }
 
 extension TimeLineViewController: UICollectionViewDelegateFlowLayout {
@@ -430,7 +490,9 @@ extension TimeLineViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PictureCollectionViewCell
             
             cell.setCell(post: postArray[indexPath.row])
-            
+            cell.contentView.frame = cell.bounds
+            cell.contentView.autoresizingMask = [.flexibleWidth,
+                                                 .flexibleTopMargin]
             return cell
         }
             
@@ -439,7 +501,9 @@ extension TimeLineViewController: UICollectionViewDataSource {
             
             cell.setCell(post: postArray[indexPath.row])
             cell.delegate = self
-            
+            cell.contentView.frame = cell.bounds
+            cell.contentView.autoresizingMask = [.flexibleWidth,
+                                                 .flexibleTopMargin]
             return cell
         }
         else {
@@ -456,6 +520,27 @@ extension TimeLineViewController: DetailCellDelegate {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
         alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showSettingAlertFromDetailCell(post: PostModel) {
+        let alert = UIAlertController(title: "詳細", message: nil, preferredStyle: .actionSheet)
+        if  post.userUid == ud.object(forKey: "uid") as? String {
+            let deleteAction = UIAlertAction(title: "この投稿を削除する", style: .default, handler: {
+                (action: UIAlertAction) -> Void in
+                self.deletePost(post: post)
+            })
+            alert.addAction(deleteAction)
+        } else {
+            let spamAction = UIAlertAction(title: "この投稿の問題を報告する", style: .default, handler: {
+                (action: UIAlertAction) -> Void in
+                self.spamPost(id: post.postId)
+            })
+            alert.addAction(spamAction)
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
     }

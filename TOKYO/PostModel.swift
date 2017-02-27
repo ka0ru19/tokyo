@@ -81,7 +81,59 @@ class PostModel {
         formatter.timeStyle = .medium // -> ex: 13:20:08
         
         return formatter.string(from: now)
-
+        
     }
-
+    
+    func deletePostById(id: String) {
+        DispatchQueue.global().async {
+            
+            // postデータベースから削除
+            let pictureRef = FIRDatabase.database().reference().child("list/picture/\(id)")
+            pictureRef.removeValue()
+            
+            DispatchQueue.main.async {
+                print("postデータベースから削除")
+            }
+            
+            // storageデータベースから削除
+            let storageRef = FIRStorage.storage().reference(forURL: "gs://tokyo-27015.appspot.com")
+            storageRef.child("images/\(id)").delete(completion: nil)
+            
+            DispatchQueue.main.async {
+                print("storageデータベースから削除")
+            }
+            
+        }
+    }
+    
+    func spamPostById(id: String) {
+        let pictureRef = FIRDatabase.database().reference().child("list/picture/\(id)")
+        pictureRef.child("spamedList").childByAutoId().setValue(id)
+    }
+    
+    func deleteSelf() {
+        
+        // postデータベースから削除
+        let pictureRef = FIRDatabase.database().reference().child("list/picture")
+        pictureRef.child(self.postId).removeValue(completionBlock: { (error, ref) in
+            if let theError = error {
+                print(theError.localizedDescription)
+            } else {
+                print("postデータベースから削除")
+            }
+            
+        })
+        
+        
+        // storageデータベースから削除
+        let storageRef = FIRStorage.storage().reference(forURL: "gs://tokyo-27015.appspot.com")
+        storageRef.child("images/\(self.postId)").delete(completion: { error -> Void in
+            if let theError = error {
+                print(theError.localizedDescription)
+            } else {
+                print("storageデータベースから削除")
+            }
+        })
+        
+    }
 }
