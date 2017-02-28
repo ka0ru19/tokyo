@@ -144,34 +144,36 @@
 		635786AF1E54435D00306B0A /* MakingView */ = {
 			isa = PBXGroup;
 			children = (
-				63CD30E31E20A1A700D68E85 /* ViewController.swift */,
-				63EA5C511E285A9100681DAE /* InfoViewController.swift */,
 				63EA5C531E286EE500681DAE /* FontRequestViewController.swift */,
 				63CD30F71E21095800D68E85 /* FontSampleCollectionViewCell.swift */,
 				63CD30F81E21095800D68E85 /* FontSampleCollectionViewCell.xib */,
+				63EA5C511E285A9100681DAE /* InfoViewController.swift */,
+				63CD30E31E20A1A700D68E85 /* ViewController.swift */,
 			);
 			name = MakingView;
+			path = MakingView;
 			sourceTree = "<group>";
 		};
 		635786B01E54437900306B0A /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
-				635786B11E54439800306B0A /* TimeLineViewController.swift */,
 				635786B31E54448100306B0A /* PictureCollectionViewCell.swift */,
 				635786B41E54448100306B0A /* PictureCollectionViewCell.xib */,
 				635786B91E598D0F00306B0A /* PictureDetailCollectionViewCell.swift */,
 				635786BA1E598D0F00306B0A /* PictureDetailCollectionViewCell.xib */,
+				635786B11E54439800306B0A /* TimeLineViewController.swift */,
 			);
 			name = TimeLine;
+			path = TimeLine;
 			sourceTree = "<group>";
 		};
 		63CD30D51E20A1A700D68E85 = {
 			isa = PBXGroup;
 			children = (
-				63CD30E01E20A1A700D68E85 /* TOKYO */,
-				63CD30DF1E20A1A700D68E85 /* Products */,
-				942E2E5E51A110F85B5ADD04 /* Pods */,
 				8C25D083789C96BE0D39A7A8 /* Frameworks */,
+				942E2E5E51A110F85B5ADD04 /* Pods */,
+				63CD30DF1E20A1A700D68E85 /* Products */,
+				63CD30E01E20A1A700D68E85 /* TOKYO */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,30 +188,30 @@
 		63CD30E01E20A1A700D68E85 /* TOKYO */ = {
 			isa = PBXGroup;
 			children = (
-				6376CF231E5BE258005E8F61 /* TOKYO.entitlements */,
-				63CD30E11E20A1A700D68E85 /* AppDelegate.swift */,
-				63CD09D01E59CA8B0069C9B6 /* UserDelegate.swift */,
-				633DBB5F1E5B265B00F0B9AC /* StringExtension.swift */,
-				635786BF1E59902A00306B0A /* PostModel.swift */,
-				635786C31E5993F000306B0A /* UserModel.swift */,
-				633DBB671E5B407300F0B9AC /* CheckReachability.swift */,
-				635786C11E5992C400306B0A /* AccountRegisterViewController.swift */,
-				63CD09CE1E59AC5E0069C9B6 /* LoginViewController.swift */,
-				633DBB651E5B31F500F0B9AC /* TabBarController.swift */,
 				635786AF1E54435D00306B0A /* MakingView */,
 				635786B01E54437900306B0A /* TimeLine */,
-				63CD30E51E20A1A700D68E85 /* Main.storyboard */,
-				633DBB691E5B474500F0B9AC /* noInternet.png */,
-				633DBB5B1E5AE68A00F0B9AC /* blackHeart.png */,
-				633DBB5C1E5AE68A00F0B9AC /* redHeart.png */,
-				63CD30F51E20B53E00D68E85 /* sample2.jpg */,
-				63CD31031E215D6E00D68E85 /* TokyoLogo1.png */,
-				635786BD1E598F0100306B0A /* person_blue.png */,
 				63CD31051E21621300D68E85 /* iconImages */,
+				635786C11E5992C400306B0A /* AccountRegisterViewController.swift */,
+				63CD30E11E20A1A700D68E85 /* AppDelegate.swift */,
 				63CD30E81E20A1A700D68E85 /* Assets.xcassets */,
-				63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */,
+				633DBB671E5B407300F0B9AC /* CheckReachability.swift */,
 				6376CF241E5BF104005E8F61 /* GoogleService-Info.plist */,
 				63CD30ED1E20A1A700D68E85 /* Info.plist */,
+				63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */,
+				63CD09CE1E59AC5E0069C9B6 /* LoginViewController.swift */,
+				63CD30E51E20A1A700D68E85 /* Main.storyboard */,
+				635786BF1E59902A00306B0A /* PostModel.swift */,
+				633DBB5F1E5B265B00F0B9AC /* StringExtension.swift */,
+				6376CF231E5BE258005E8F61 /* TOKYO.entitlements */,
+				633DBB651E5B31F500F0B9AC /* TabBarController.swift */,
+				63CD31031E215D6E00D68E85 /* TokyoLogo1.png */,
+				63CD09D01E59CA8B0069C9B6 /* UserDelegate.swift */,
+				635786C31E5993F000306B0A /* UserModel.swift */,
+				633DBB5B1E5AE68A00F0B9AC /* blackHeart.png */,
+				633DBB691E5B474500F0B9AC /* noInternet.png */,
+				635786BD1E598F0100306B0A /* person_blue.png */,
+				633DBB5C1E5AE68A00F0B9AC /* redHeart.png */,
+				63CD30F51E20B53E00D68E85 /* sample2.jpg */,
 			);
 			path = TOKYO;
 			sourceTree = "<group>";
@@ -465,6 +467,7 @@
 				63CD30E61E20A1A700D68E85 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */ = {
@@ -473,6 +476,7 @@
 				63CD30EB1E20A1A700D68E85 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
