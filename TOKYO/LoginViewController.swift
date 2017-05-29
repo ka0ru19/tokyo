@@ -40,10 +40,7 @@ class LoginViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-
-    
     func login() {
-        
         startIndicator()
         
         guard let signInEmail = userMailTextField.text else { return }
@@ -53,7 +50,6 @@ class LoginViewController: UIViewController {
     }
     
     func successLogin(uid: String) {
-        
         stopIndicator()
         
         print(uid)
@@ -73,7 +69,6 @@ class LoginViewController: UIViewController {
         
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
-
     }
     
     /*
@@ -90,7 +85,6 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func initView() {
-        
         userMailTextField.delegate = self
         userMailTextField.tag = 1
         userMailTextField.returnKeyType = .next
@@ -120,31 +114,22 @@ extension LoginViewController {
         indicator = UIActivityIndicatorView()
         
         // 以下、各種プロパティ設定
-        
         // indicatorのframeを作成
         indicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        
         // frameを角丸にする場合は数値調整
         indicator.layer.cornerRadius = 8
-        
         // indicatorのstyle（color）を設定
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
-        
         // indicatorのbackgroundColorを設定
         indicator.backgroundColor = UIColor.darkGray
-        
         // indicatorの配置を設定
         indicator.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
-        
         // indicatorのアニメーションが終了したら自動的にindicatorを非表示にするか否かの設定
         indicator.hidesWhenStopped = true
-        
         // indicatorのアニメーションを開始
         indicator.startAnimating()
-        
         // 画面操作の無効化
         self.view.isUserInteractionEnabled = false
-        
         // viewにindicatorを追加
         self.view.addSubview(indicator)
         
@@ -161,16 +146,11 @@ extension LoginViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if let nextTextField = nextInputTextField(tagNum: textField.tag) {
-            
             textField.resignFirstResponder() // focus解除
             nextTextField.becomeFirstResponder() // focus
-            
         } else {
-            
             login()
         }
         return true
@@ -178,11 +158,9 @@ extension LoginViewController: UITextFieldDelegate {
     
     // 次の入力に移動するメソッド
     func nextInputTextField(tagNum: Int) -> UITextField? {
-        
         if let nextTextField = self.view.viewWithTag(tagNum + 1) {
             return tagNum >= 2 ? nil : nextTextField as? UITextField
         }
         return nil
     }
-    
 }

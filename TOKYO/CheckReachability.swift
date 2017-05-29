@@ -4,14 +4,13 @@
 //
 //  Created by 井上航 on 2017/02/21.
 //  Copyright © 2017年 Wataru Inoue. All rights reserved.
+// インターネット接続確認
 //
 
 import Foundation
-
 import SystemConfiguration
 
 func CheckReachability(host_name:String)->Bool{
-    
     let reachability = SCNetworkReachabilityCreateWithName(nil, host_name)!
     var flags = SCNetworkReachabilityFlags.connectionAutomatic
     if !SCNetworkReachabilityGetFlags(reachability, &flags) {
