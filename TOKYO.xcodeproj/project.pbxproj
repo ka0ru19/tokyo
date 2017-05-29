@@ -92,7 +92,7 @@
 		63CD30E11E20A1A700D68E85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CD30E31E20A1A700D68E85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		63CD30E61E20A1A700D68E85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		63CD30E81E20A1A700D68E85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		63CD30E81E20A1A700D68E85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		63CD30EB1E20A1A700D68E85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63CD30ED1E20A1A700D68E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63CD30F51E20B53E00D68E85 /* sample2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample2.jpg; sourceTree = "<group>"; };
@@ -144,14 +144,17 @@
 		63490FE71EDBB35200382703 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				633DBB671E5B407300F0B9AC /* CheckReachability.swift */,
 				633DBB5F1E5B265B00F0B9AC /* StringExtension.swift */,
 			);
-			name = Extension;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		63490FE81EDBB4D900382703 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				63CD30E81E20A1A700D68E85 /* Assets.xcassets */,
+				63CD31051E21621300D68E85 /* IconImages */,
 				63CD31031E215D6E00D68E85 /* TokyoLogo1.png */,
 				633DBB5B1E5AE68A00F0B9AC /* blackHeart.png */,
 				633DBB691E5B474500F0B9AC /* noInternet.png */,
@@ -159,16 +162,79 @@
 				633DBB5C1E5AE68A00F0B9AC /* redHeart.png */,
 				63CD30F51E20B53E00D68E85 /* sample2.jpg */,
 			);
-			name = Images;
+			path = Images;
+			sourceTree = "<group>";
+		};
+		63490FE91EDBB5E400382703 /* FontSampleCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				63CD30F71E21095800D68E85 /* FontSampleCollectionViewCell.swift */,
+				63CD30F81E21095800D68E85 /* FontSampleCollectionViewCell.xib */,
+			);
+			path = FontSampleCollectionView;
+			sourceTree = "<group>";
+		};
+		63490FEA1EDBB61900382703 /* InfoView */ = {
+			isa = PBXGroup;
+			children = (
+				635786C11E5992C400306B0A /* AccountRegisterViewController.swift */,
+				63EA5C531E286EE500681DAE /* FontRequestViewController.swift */,
+				63EA5C511E285A9100681DAE /* InfoViewController.swift */,
+				63CD09CE1E59AC5E0069C9B6 /* LoginViewController.swift */,
+			);
+			path = InfoView;
+			sourceTree = "<group>";
+		};
+		63490FEB1EDBB63F00382703 /* PictureCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				635786B31E54448100306B0A /* PictureCollectionViewCell.swift */,
+				635786B41E54448100306B0A /* PictureCollectionViewCell.xib */,
+			);
+			path = PictureCollectionView;
+			sourceTree = "<group>";
+		};
+		63490FEC1EDBB65100382703 /* PictureDetailCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				635786B91E598D0F00306B0A /* PictureDetailCollectionViewCell.swift */,
+				635786BA1E598D0F00306B0A /* PictureDetailCollectionViewCell.xib */,
+			);
+			path = PictureDetailCollectionView;
+			sourceTree = "<group>";
+		};
+		63490FED1EDBB68400382703 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				63CD09D01E59CA8B0069C9B6 /* UserDelegate.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		63490FEE1EDBB6C400382703 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				635786BF1E59902A00306B0A /* PostModel.swift */,
+				635786C31E5993F000306B0A /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		63490FF01EDBB75400382703 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				635786AF1E54435D00306B0A /* MakingView */,
+				635786B01E54437900306B0A /* TimeLineView */,
+				633DBB651E5B31F500F0B9AC /* TabBarController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		635786AF1E54435D00306B0A /* MakingView */ = {
 			isa = PBXGroup;
 			children = (
-				63EA5C531E286EE500681DAE /* FontRequestViewController.swift */,
-				63CD30F71E21095800D68E85 /* FontSampleCollectionViewCell.swift */,
-				63CD30F81E21095800D68E85 /* FontSampleCollectionViewCell.xib */,
-				63EA5C511E285A9100681DAE /* InfoViewController.swift */,
+				63490FE91EDBB5E400382703 /* FontSampleCollectionView */,
+				63490FEA1EDBB61900382703 /* InfoView */,
 				63CD30E31E20A1A700D68E85 /* ViewController.swift */,
 			);
 			path = MakingView;
@@ -177,14 +243,11 @@
 		635786B01E54437900306B0A /* TimeLineView */ = {
 			isa = PBXGroup;
 			children = (
-				635786B31E54448100306B0A /* PictureCollectionViewCell.swift */,
-				635786B41E54448100306B0A /* PictureCollectionViewCell.xib */,
-				635786B91E598D0F00306B0A /* PictureDetailCollectionViewCell.swift */,
-				635786BA1E598D0F00306B0A /* PictureDetailCollectionViewCell.xib */,
+				63490FEB1EDBB63F00382703 /* PictureCollectionView */,
+				63490FEC1EDBB65100382703 /* PictureDetailCollectionView */,
 				635786B11E54439800306B0A /* TimeLineViewController.swift */,
 			);
-			name = TimeLineView;
-			path = TimeLine;
+			path = TimeLineView;
 			sourceTree = "<group>";
 		};
 		63CD30D51E20A1A700D68E85 = {
@@ -208,25 +271,17 @@
 		63CD30E01E20A1A700D68E85 /* TOKYO */ = {
 			isa = PBXGroup;
 			children = (
-				63CD30E11E20A1A700D68E85 /* AppDelegate.swift */,
-				633DBB651E5B31F500F0B9AC /* TabBarController.swift */,
+				63490FED1EDBB68400382703 /* Account */,
 				63490FE71EDBB35200382703 /* Extension */,
-				635786AF1E54435D00306B0A /* MakingView */,
-				635786B01E54437900306B0A /* TimeLineView */,
-				63CD31051E21621300D68E85 /* IconImages */,
 				63490FE81EDBB4D900382703 /* Images */,
-				635786C11E5992C400306B0A /* AccountRegisterViewController.swift */,
-				63CD09CE1E59AC5E0069C9B6 /* LoginViewController.swift */,
-				63CD30E81E20A1A700D68E85 /* Assets.xcassets */,
-				633DBB671E5B407300F0B9AC /* CheckReachability.swift */,
+				63490FEE1EDBB6C400382703 /* Model */,
+				63490FF01EDBB75400382703 /* View */,
+				63CD30E11E20A1A700D68E85 /* AppDelegate.swift */,
 				6376CF241E5BF104005E8F61 /* GoogleService-Info.plist */,
 				63CD30ED1E20A1A700D68E85 /* Info.plist */,
 				63CD30EA1E20A1A700D68E85 /* LaunchScreen.storyboard */,
 				63CD30E51E20A1A700D68E85 /* Main.storyboard */,
-				635786BF1E59902A00306B0A /* PostModel.swift */,
 				6376CF231E5BE258005E8F61 /* TOKYO.entitlements */,
-				63CD09D01E59CA8B0069C9B6 /* UserDelegate.swift */,
-				635786C31E5993F000306B0A /* UserModel.swift */,
 			);
 			path = TOKYO;
 			sourceTree = "<group>";
@@ -240,7 +295,7 @@
 				63CD31201E21621400D68E85 /* iTunesArtwork@3x.png */,
 			);
 			name = IconImages;
-			path = iconImages;
+			path = ../IconImages;
 			sourceTree = "<group>";
 		};
 		63CD31061E21621400D68E85 /* AppIcon.appiconset */ = {
